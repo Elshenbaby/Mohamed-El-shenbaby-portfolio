@@ -213,7 +213,7 @@ export function App() {
             <div className="flex justify-center lg:justify-end">
               <div className={`relative w-full max-w-[420px] overflow-hidden rounded-[2.25rem] border shadow-[0_20px_60px_rgba(0,0,0,0.14)] ${isDarkMode ? 'border-white/10 bg-white/5' : 'border-black/10 bg-white'}`}>
                 <img
-                  src="/my-photo-v2.jpeg"
+                  src="/my-photo-v3.jpeg?v=3"
                   alt={content.name}
                   className="h-[560px] w-full object-cover object-center"
                 />
