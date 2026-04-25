@@ -1,0 +1,83 @@
+Product-oriented Data Analyst with hands-on experience building analytics systems, dashboards, and automation tools used
+in real operational environments. Experienced in transforming raw data into decision-making systems using Python, SQL,
+Django, and BI tools. Currently leading national B2C strategy and marketing operations, combining data insights, user
+behavior, and growth strategies to drive engagement and performance. Strong interest in Product Management, Data
+Analytics, and AI-driven solutions.
+Data & Analytics:
+SQL, Data Modeling, BI (Power BI,
+Tableau), Machine Learning
+Fundamentals
+Product & Business:
+Product Thinking, Funnel
+Analysis, KPI Tracking, Growth
+Strategy, Market Research
+Marketing & Creative:
+Digital Marketing, Campaign
+Strategy, Graphic Design, Video
+E d i t i n g
+Tools & Technologies:
+Python, Django,
+PostgreSQL, Redis, Docker,
+Google Apps Script
+PROFILE INFO
+Product & Data Analyst | AI Engineering Student
+Cairo, Egypt | 01225928917 | mohamedelshenbaby101@gmail.com
+Mohamed El-shenbaby
+S K I L L S
+Brand Experience Director (Marketing & B2C) - AIESEC in Egypt
+IRIS – Analytics & KPI Dashboard Platform
+Leading national B2C strategy, driving user acquisition and engagement across Egypt
+Designing end-to-end user journeys and executing data-driven marketing campaigns
+Building KPI tracking systems and dashboards while managing cross-functional teams and optimizing performance
+through market insights
+Built analytics platform to monitor multi-location performance
+Developed KPI dashboards, funnel tracking, and drill-down
+i n s i g h t s
+Applied data-quality rules and automated data refresh
+Built full-stack system for tracking and analyzing
+financial behavior
+Designed SQL data model and interactive BI
+dashboards
+Integrated Power BI into a web-based platform
+Developed responsive booking platform with calendar-
+based reservations
+Built scalable frontend using React and TypeScript
+Tech: Django, PostgreSQL, Celery, Redis, Docker
+Tech: Django, SQLite, Power BI, Python
+Tech: Google Apps Script, REST APIs
+Tech: React, TypeScript, Tailwind CSS
+Jul 2025 - Present
+WORK EXPERIENCE
+P R O J E C T S
+Sarmady Events - Co-Founder
+Goodsmart - Brand Representative
+Marketing & Sales Leadership (Volunteer) at AIESEC in Egypt
+Head of Public Relations -Y2B v2 at AIESEC in Egypt
+B2C CRM Automation (Podio Integration)
+DataWallet – Financial Analytics Platform
+Tanta Club Portal – Booking System
+J u l 2 0 2 4 - O c t 2 0 2 4
+F e b 2 0 2 3 - F e b 2 0 2 5
+F e b 2 0 2 5 - m a y 2 0 2 5
+F e b 2 0 2 5 - J u l y 2 0 2 5
+Represented the brand at events and promotions, engaging customers and supporting marketing and business
+development efforts to enhance brand visibility and impact.
+Led PR for 800+ attendee event
+Secured 30+ influencers and 10+ media partners
+Built API-based automation system for CRM data processing
+Developed pipelines, validation logic, and approval workflows
+Implemented duplicate detection using fuzzy matching
+Founded and managed event agency (operations, marketing, partnerships)
+Launched events exceeding attendance and engagement targets
+Led marketing, PR, and sales initiatives across multiple roles, driving 3000+ leads and partnerships with 10+ organizations
+Conducted 1000+ user interviews and applied data analysis to optimize campaigns and customer experience
+Managed and developed teams (up to 30 members) while executing online and offline campaigns
+Faculty of Engineering, Artificial
+Intelligence Department
+Digital Egypt Pioneers Initiative (DEPI) – Data Analytics
+T r a c k
+Ministry of Communications & Information Technology (MCIT)
+EDUCATION CERTIFICATIONSLANGUAGES
+2022-2027 | Tanta university
+Arabic : native
+English : advanced

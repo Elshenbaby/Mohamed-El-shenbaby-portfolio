@@ -1,0 +1,83 @@
+P r o d u c t - o r i e n t e d  D a t a  A n a l y s t  w i t h  h a n d s - o n  e x p e r i e n c e  b u i l d i n g  a n a l y t i c s  s y s t e m s ,  d a s h b o a r d s ,  a n d  a u t o m a t i o n  t o o l s  u s e d
+i n  r e a l  o p e r a t i o n a l  e n v i r o n m e n t s .  E x p e r i e n c e d  i n  t r a n s f o r m i n g  r a w  d a t a  i n t o  d e c i s i o n - m a k i n g  s y s t e m s  u s i n g  P y t h o n ,  S Q L ,
+D ja n g o ,  a n d  B I  t o o l s .  C u r r e n t l y  l e a d i n g  n a t i o n a l  B 2 C  s t r a t e g y  a n d  m a r k e t i n g  o p e r a t i o n s ,  c o m b i n i n g  d a t a  i n s i g h t s ,  u s e r
+b e h a v i o r ,  a n d  g r o w t h  s t r a t e g i e s  t o  d r i v e  e n g a g e m e n t  a n d  p e r f o r m a n c e .  S t r o n g  i n t e r e s t  i n  P r o d u c t  M a n a g e m e n t ,  D a t a
+A n a l y t i c s ,  a n d  A I - d r i v e n  s o l u t i o n s .
+D a t a  &  A n a l y t i c s :
+S Q L ,  D a t a  M o d e l i n g ,  B I  ( P o w e r  B I ,
+T a b l e a u ) ,  M a c h i n e  L e a r n i n g
+F u n d a m e n t a l s  
+P r o d u c t  &  B u s i n e s s :
+P r o d u c t  T h i n k i n g ,  F u n n e l
+A n a l y s i s ,  K P I  T r a c k i n g ,  G r o w t h
+S t r a t e g y ,  M a r k e t  R e s e a r c h
+M a r k e t i n g  &  C r e a t i v e :
+ D i g i t a l  M a r k e t i n g ,  C a m p a i g n
+S t r a t e g y ,  G r a p h i c  D e s i g n ,  V i d e o
+E d i t i n g
+T o o l s  &  T e c h n o l o g i e s :
+P y t h o n ,  D ja n g o ,
+P o s t g r e S Q L ,  R e d i s ,  D o c k e r ,
+G o o g l e  A p p s  S c r i p t
+P R O F I L E  I N F O
+P r o d u c t  &  D a t a  A n a l y s t  |  A I  E n g i n e e r i n g  S t u d e n t
+C a i r o ,  E g y p t  |   0 1 2 2 5 9 2 8 9 1 7  |   m o h a m e d e l s h e n b a b y 1 0 1 @ g m a i l . c o m
+M o h a m e d  E l - s h e n b a b y
+S K I L L S
+B r a n d  E x p e r i e n c e  D i r e c t o r  ( M a r k e t i n g  &  B 2 C )  -  A I E S E C  i n  E g y p t
+I R I S  –  A n a l y t i c s  &  K P I  D a s h b o a r d  P l a t f o r m
+L e a d i n g  n a t i o n a l  B 2 C  s t r a t e g y ,  d r i v i n g  u s e r  a c q u i s i t i o n  a n d  e n g a g e m e n t  a c r o s s  E g y p t
+D e s i g n i n g  e n d - t o - e n d  u s e r  jo u r n e y s  a n d  e x e c u t i n g  d a t a - d r i v e n  m a r k e t i n g  c a m p a i g n s
+B u i l d i n g  K P I  t r a c k i n g  s y s t e m s  a n d  d a s h b o a r d s  w h i l e  m a n a g i n g  c r o s s - f u n c t i o n a l  t e a m s  a n d  o p t i m i z i n g  p e r f o r m a n c e
+t h r o u g h  m a r k e t  i n s i g h t s
+B u i l t  a n a l y t i c s  p l a t f o r m  t o  m o n i t o r  m u l t i - l o c a t i o n  p e r f o r m a n c e
+D e v e l o p e d  K P I  d a s h b o a r d s ,  f u n n e l  t r a c k i n g ,  a n d  d r i l l - d o w n
+i n s i g h t s
+A p p l i e d  d a t a - q u a l i t y  r u l e s  a n d  a u t o m a t e d  d a t a  r e f r e s h
+B u i l t  f u l l - s t a c k  s y s t e m  f o r  t r a c k i n g  a n d  a n a l y z i n g
+f i n a n c i a l  b e h a v i o r
+D e s i g n e d  S Q L  d a t a  m o d e l  a n d  i n t e r a c t i v e  B I
+d a s h b o a r d s
+I n t e g r a t e d  P o w e r  B I  i n t o  a  w e b - b a s e d  p l a t f o r m
+D e v e l o p e d  r e s p o n s i v e  b o o k i n g  p l a t f o r m  w i t h  c a l e n d a r -
+b a s e d  r e s e r v a t i o n s
+B u i l t  s c a l a b l e  f r o n t e n d  u s i n g  R e a c t  a n d  T y p e S c r i p t
+T e c h :  D ja n g o ,  P o s t g r e S Q L ,  C e l e r y ,  R e d i s ,  D o c k e r
+T e c h :  D ja n g o ,  S Q L i t e ,  P o w e r  B I ,  P y t h o n
+T e c h :  G o o g l e  A p p s  S c r i p t ,  R E S T  A P I s
+T e c h :  R e a c t ,  T y p e S c r i p t ,  T a i l w i n d  C S S
+J u l  2 0 2 5  -  P r e s e n t
+ W O R K  E X P E R I E N C E
+P R O J E C T S
+S a r m a d y  E v e n t s  -  C o - F o u n d e r  
+G o o d s m a r t  -  B r a n d  R e p r e s e n t a t i v e
+M a r k e t i n g  &  S a l e s  L e a d e r s h i p  ( V o l u n t e e r )  a t  A I E S E C  i n  E g y p t
+H e a d  o f  P u b l i c  R e l a t i o n s  - Y 2 B  v 2  a t  A I E S E C  i n  E g y p t  
+B 2 C  C R M  A u t o m a t i o n  ( P o d i o  I n t e g r a t i o n )
+D a t a W a l l e t  –  F i n a n c i a l  A n a l y t i c s  P l a t f o r m
+T a n t a  C l u b  P o r t a l  –  B o o k i n g  S y s t e m
+J u l  2 0 2 4  -  O c t  2 0 2 4
+F e b  2 0 2 3  -  F e b  2 0 2 5
+F e b   2 0 2 5  -  m a y  2 0 2 5
+F e b   2 0 2 5  -  J u l y  2 0 2 5
+R e p r e s e n t e d  t h e  b r a n d  a t  e v e n t s  a n d  p r o m o t i o n s ,  e n g a g i n g  c u s t o m e r s  a n d  s u p p o r t i n g  m a r k e t i n g  a n d  b u s i n e s s
+d e v e l o p m e n t  e f f o r t s  t o  e n h a n c e  b r a n d  v i s i b i l i t y  a n d  i m p a c t .
+ L e d  P R  f o r  8 0 0 +  a t t e n d e e  e v e n t
+S e c u r e d  3 0 +  i n f l u e n c e r s  a n d  1 0 +  m e d i a  p a r t n e r s
+B u i l t  A P I - b a s e d  a u t o m a t i o n  s y s t e m  f o r  C R M  d a t a  p r o c e s s i n g
+D e v e l o p e d  p i p e l i n e s ,  v a l i d a t i o n  l o g i c ,  a n d  a p p r o v a l  w o r k f l o w s
+I m p l e m e n t e d  d u p l i c a t e  d e t e c t i o n  u s i n g  f u z z y  m a t c h i n g
+F o u n d e d  a n d  m a n a g e d  e v e n t  a g e n c y  ( o p e r a t i o n s ,  m a r k e t i n g ,  p a r t n e r s h i p s )
+L a u n c h e d  e v e n t s  e x c e e d i n g  a t t e n d a n c e  a n d  e n g a g e m e n t  t a r g e t s
+L e d  m a r k e t i n g ,  P R ,  a n d  s a l e s  i n i t i a t i v e s  a c r o s s  m u l t i p l e  r o l e s ,  d r i v i n g  3 0 0 0 +  l e a d s  a n d  p a r t n e r s h i p s  w i t h  1 0 +  o r g a n i z a t i o n s
+C o n d u c t e d  1 0 0 0 +  u s e r  i n t e r v i e w s  a n d  a p p l i e d  d a t a  a n a l y s i s  t o  o p t i m i z e  c a m p a i g n s  a n d  c u s t o m e r  e x p e r i e n c e
+M a n a g e d  a n d  d e v e l o p e d  t e a m s  ( u p  t o  3 0  m e m b e r s )  w h i l e  e x e c u t i n g  o n l i n e  a n d  o f f l i n e  c a m p a i g n s
+F a c u l t y  o f  E n g i n e e r i n g ,  A r t i f i c i a l
+I n t e l l i g e n c e  D e p a r t m e n t
+D i g i t a l  E g y p t  P i o n e e r s  I n i t i a t i v e  ( D E P I )  –  D a t a  A n a l y t i c s
+T r a c k
+M i n i s t r y  o f  C o m m u n i c a t i o n s  &  I n f o r m a t i o n  T e c h n o l o g y  ( M C I T )
+E D U C A T I O N  C E R T I F I C A T I O N S L A N G U A G E S
+2 0 2 2 - 2 0 2 7  |  T a n t a  u n i v e r s i t y
+A r a b i c  :  n a t i v e  
+E n g l i s h  :  a d v a n c e d
