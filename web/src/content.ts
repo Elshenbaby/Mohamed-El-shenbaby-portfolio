@@ -36,6 +36,12 @@ export type OtherWork = {
   note: string;
 };
 
+export type SkillGroup = {
+  id: string;
+  title: string;
+  items: string[];
+};
+
 export const content = {
   name: "Mohamed El-Shenbaby",
   location: "Cairo, Egypt",
@@ -45,7 +51,7 @@ export const content = {
     "Freelance software engineer. I help teams replace messy spreadsheets and outdated tools with clean Django systems they can actually run.",
   photo: `${import.meta.env.BASE_URL}profile.jpg`,
   intro:
-    "I'm Mohamed, an AI Engineering student who builds real software for real teams. I focus on custom CRMs, migrations from tools like Podio, and getting products live, not just demos.",
+    "I'm Mohamed, an AI Engineering student who builds real software for real teams. I focus on custom CRMs, data migrations, live dashboards, and getting products into production, not just demos.",
   links: [
     {
       label: "LinkedIn",
@@ -101,28 +107,76 @@ export const content = {
       id: "migration-deploy",
       title: "Migration & deploy",
       blurb:
-        "Move off Podio or legacy tools. Import your data, clean duplicates, and go live on a modern stack.",
+        "Move off spreadsheets or legacy tools. Import your data, clean duplicates, and go live on a modern stack.",
     },
     {
       id: "dashboards",
       title: "Dashboards & automation",
       blurb:
-        "Live KPI boards, n8n workflows, and Apps Script / Sheets hooks so reporting stops living in chat threads.",
+        "Live KPI boards, n8n workflows, and Sheets hooks so reporting stops living in chat threads.",
     },
   ] satisfies Service[],
+  skillGroups: [
+    {
+      id: "engineering",
+      title: "Engineering",
+      items: [
+        "Django & PostgreSQL",
+        "Custom CRM architecture",
+        "REST APIs",
+        "Docker deploy",
+        "React & TypeScript",
+        "Redis & background jobs",
+      ],
+    },
+    {
+      id: "automation",
+      title: "Automation",
+      items: [
+        "n8n workflows",
+        "Webhooks & sync",
+        "Google Apps Script",
+        "Sheets / Drive pipelines",
+        "Approval & validation flows",
+        "Duplicate detection",
+      ],
+    },
+    {
+      id: "product",
+      title: "Product delivery",
+      items: [
+        "Data migration",
+        "Live dashboards",
+        "Event & registration sites",
+        "Interactive web experiences",
+        "Production handoff",
+        "Client-ready demos",
+      ],
+    },
+    {
+      id: "extras",
+      title: "Extras I can support",
+      items: [
+        "Brand storytelling",
+        "Public relations",
+        "Campaign planning",
+        "Event experience design",
+        "Partner & media outreach",
+        "Portfolio / pitch sites",
+      ],
+    },
+  ] satisfies SkillGroup[],
   caseStudies: [
     {
       id: "soluo",
       name: "Soluo",
       tagline: "Custom CRM platform",
       blurb:
-        "Replaced an aging Podio setup with a full Django CRM for companies, deals, membership, and live sync. Now running in production.",
+        "Rebuilt a legacy CRM into a full Django system for companies, deals, membership, and live sync. Now running in production.",
       image: `${import.meta.env.BASE_URL}projects/soluo.png`,
       stack: ["Django", "PostgreSQL", "Docker"],
       featured: true,
-      links: [
-        { label: "Live site", href: "https://soluo.aiesec.org.eg" },
-      ],
+      links: [{ label: "Live site", href: "https://soluo.aiesec.org.eg" }],
     },
     {
       id: "global-village-26",
@@ -176,23 +230,21 @@ export const content = {
       id: "n8n-new-company",
       title: "New company intake",
       blurb:
-        "When a new company is created in the CRM, an n8n workflow picks it up and routes the data into the next ops step automatically.",
+        "When a new company is created in the CRM, a workflow picks it up and routes the data into the next ops step automatically.",
       stack: ["n8n", "Webhooks", "CRM"],
-      links: [{ label: "n8n", href: "https://n8n.aiesec.org.eg" }],
     },
     {
       id: "n8n-deals-sync",
       title: "Deal pipeline sync",
       blurb:
-        "Create, update, and delete events on deals fire an n8n workflow that keeps the deal index and downstream tools in sync.",
+        "Create, update, and delete events on deals fire a workflow that keeps the deal index and downstream tools in sync.",
       stack: ["n8n", "Webhooks", "CRM"],
-      links: [{ label: "n8n", href: "https://n8n.aiesec.org.eg" }],
     },
     {
       id: "crm-approvals",
       title: "CRM approval engine",
       blurb:
-        "Apps Script automation for CRM validation, approvals, and duplicate checks across branches. The workflow layer before the full Django CRM rebuild.",
+        "Automation for CRM validation, approvals, and duplicate checks across branches. The workflow layer before a full Django CRM rebuild.",
       stack: ["Apps Script", "Sheets", "REST APIs"],
       links: [
         {
@@ -204,20 +256,20 @@ export const content = {
   ] satisfies Automation[],
   otherWork: [
     {
-      title: "Head of Public Relations (Y2B)",
-      org: "AIESEC in Egypt",
+      title: "Head of Public Relations",
+      org: "National youth event",
       date: "2025",
       note: "PR for a large national event, influencers and media partners.",
     },
     {
       title: "Marketing & sales leadership",
-      org: "AIESEC in Egypt",
+      org: "National youth network",
       date: "2025",
       note: "Campaigns and team leadership across growth initiatives.",
     },
     {
       title: "Brand Experience Director",
-      org: "AIESEC in Egypt",
+      org: "National youth network",
       date: "2025 - Present",
       note: "National brand and customer experience strategy.",
     },

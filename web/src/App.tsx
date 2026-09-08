@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const navItems = [
   { label: "Work", href: "#work" },
+  { label: "Skills", href: "#skills" },
   { label: "Play", href: "#play" },
   { label: "Automations", href: "#automations" },
   { label: "About", href: "#about" },
@@ -200,7 +201,44 @@ export function App() {
           </div>
         </section>
 
-        <section id="work" className="border-t border-line bg-ink-2 py-20 sm:py-28">
+        <section id="skills" className="border-t border-line bg-ink-2 py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+            <p className="section-label reveal">Skills</p>
+            <h2 className="reveal mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+              What I can do
+            </h2>
+            <p className="reveal mt-3 max-w-xl text-mist">
+              Core build skills plus extras I can support when a project needs more than code.
+            </p>
+            <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {content.skillGroups.map((group) => (
+                <article
+                  key={group.id}
+                  className={`reveal border-t pt-5 ${
+                    group.id === "extras" ? "border-amber/50" : "border-teal/35"
+                  }`}
+                >
+                  <h3
+                    className={`font-display text-lg font-bold ${
+                      group.id === "extras" ? "text-amber" : "text-foam"
+                    }`}
+                  >
+                    {group.title}
+                  </h3>
+                  <ul className="mt-4 space-y-2">
+                    {group.items.map((item) => (
+                      <li key={item} className="text-sm leading-relaxed text-mist">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="work" className="border-t border-line py-20 sm:py-28">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <p className="section-label reveal">Selected work</p>
             <h2 className="reveal mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
@@ -314,7 +352,7 @@ export function App() {
               n8n, Sheets & workflows
             </h2>
             <p className="reveal mt-3 max-w-xl text-mist">
-              Production automations that move CRM data without manual copy-paste.
+              Production workflows that move CRM data without manual copy-paste.
             </p>
             <div className="mt-10 grid gap-6 md:grid-cols-3">
               {content.automations.map((item) => (
