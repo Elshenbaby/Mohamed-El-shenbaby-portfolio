@@ -93,9 +93,9 @@ export const content = {
       image: `${import.meta.env.BASE_URL}projects/global-village.png`,
       photos: [
         `${import.meta.env.BASE_URL}projects/gv/gallery-1.jpg`,
+        `${import.meta.env.BASE_URL}projects/gv/gallery-3.jpg`,
         `${import.meta.env.BASE_URL}projects/gv/about-1.webp`,
         `${import.meta.env.BASE_URL}projects/gv/about-2.webp`,
-        `${import.meta.env.BASE_URL}projects/gv/gallery-2.jpg`,
         `${import.meta.env.BASE_URL}projects/gv/about-3.webp`,
       ],
       stack: ["React", "TypeScript", "Vite"],
