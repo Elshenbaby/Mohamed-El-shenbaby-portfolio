@@ -45,7 +45,7 @@ export const content = {
     "Freelance software engineer. I help teams replace messy spreadsheets and outdated tools with clean Django systems they can actually run.",
   photo: `${import.meta.env.BASE_URL}profile.jpg`,
   intro:
-    "I’m Mohamed — an AI Engineering student who builds real software for real teams. I focus on custom CRMs, migrations from tools like Podio, and getting products live — not just demos.",
+    "I'm Mohamed, an AI Engineering student who builds real software for real teams. I focus on custom CRMs, migrations from tools like Podio, and getting products live, not just demos.",
   links: [
     {
       label: "LinkedIn",
@@ -63,7 +63,7 @@ export const content = {
       id: "crm-builds",
       title: "Custom CRM builds",
       blurb:
-        "Django systems for companies, deals, members, and approvals — built for how your team actually works.",
+        "Django systems for companies, deals, members, and approvals, built for how your team actually works.",
     },
     {
       id: "migration-deploy",
@@ -84,7 +84,7 @@ export const content = {
       name: "Soluo",
       tagline: "Custom CRM platform",
       blurb:
-        "Replaced an aging Podio setup with a full Django CRM — companies, deals, membership, and live sync — now running in production.",
+        "Replaced an aging Podio setup with a full Django CRM for companies, deals, membership, and live sync. Now running in production.",
       image: `${import.meta.env.BASE_URL}projects/soluo.png`,
       stack: ["Django", "PostgreSQL", "Docker"],
       featured: true,
@@ -120,17 +120,17 @@ export const content = {
       name: "IRIS",
       tagline: "Analytics dashboard",
       blurb:
-        "Performance dashboard so leadership can see pipeline health in one place — auto-refreshed, not hand-built sheets.",
+        "Performance dashboard so leadership can see pipeline health in one place. Auto-refreshed, not hand-built sheets.",
       image: `${import.meta.env.BASE_URL}projects/iris.png`,
       stack: ["Django", "PostgreSQL", "Redis"],
       links: [{ label: "Live site", href: "https://iris.aiesec.org.eg/" }],
     },
     {
       id: "omar-web",
-      name: "Omar’s Journey",
+      name: "Omar's Journey",
       tagline: "Interactive portfolio site",
       blurb:
-        "Arcade-styled portfolio for a client internship story — playable levels, mini-games, and a photo finale instead of a slide deck.",
+        "Arcade-styled portfolio for a client internship story: playable levels, mini-games, and a photo finale instead of a slide deck.",
       image: `${import.meta.env.BASE_URL}projects/omar-web.png`,
       stack: ["React", "TypeScript", "Vite"],
       links: [
@@ -160,7 +160,7 @@ export const content = {
       id: "crm-approvals",
       title: "CRM approval engine",
       blurb:
-        "Apps Script automation for CRM validation, approvals, and duplicate checks across branches — the workflow layer before the full Django CRM rebuild.",
+        "Apps Script automation for CRM validation, approvals, and duplicate checks across branches. The workflow layer before the full Django CRM rebuild.",
       stack: ["Apps Script", "Sheets", "REST APIs"],
       links: [
         {
@@ -175,7 +175,7 @@ export const content = {
       title: "Head of Public Relations (Y2B)",
       org: "AIESEC in Egypt",
       date: "2025",
-      note: "PR for a large national event — influencers and media partners.",
+      note: "PR for a large national event, influencers and media partners.",
     },
     {
       title: "Marketing & sales leadership",
@@ -186,19 +186,19 @@ export const content = {
     {
       title: "Brand Experience Director",
       org: "AIESEC in Egypt",
-      date: "2025 – Present",
+      date: "2025 - Present",
       note: "National brand and customer experience strategy.",
     },
     {
       title: "GAME ON",
       org: "Sarmady Events",
       date: "2024",
-      note: "Co-founded Tanta’s first board-games event.",
+      note: "Co-founded Tanta's first board-games event.",
     },
     {
       title: "Brand representative",
       org: "Goodsmart",
-      date: "2023 – 2025",
+      date: "2023 - 2025",
       note: "Events and promotions.",
     },
   ] satisfies OtherWork[],

@@ -2,11 +2,13 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { content } from "./content";
+import { MazeQuest } from "./MazeQuest";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const navItems = [
   { label: "Work", href: "#work" },
+  { label: "Play", href: "#play" },
   { label: "Automations", href: "#automations" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
@@ -287,6 +289,8 @@ export function App() {
           </div>
         </section>
 
+        <MazeQuest />
+
         <section id="automations" className="border-t border-line py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <p className="section-label reveal">Automations</p>
@@ -361,7 +365,7 @@ export function App() {
               Let’s build your CRM
             </h2>
             <p className="reveal mx-auto mt-5 max-w-lg text-mist">
-              Tell me what you’re running today and what you want instead — I’ll reply with a clear next step.
+              Tell me what you're running today and what you want instead. I'll reply with a clear next step.
             </p>
             <div className="reveal mt-10 flex flex-wrap justify-center gap-3">
               <a
