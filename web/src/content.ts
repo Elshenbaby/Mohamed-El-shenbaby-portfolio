@@ -90,7 +90,7 @@ export const content = {
       tagline: "Event website & registration",
       blurb:
         "Live event site for AIESEC Egypt’s Global Village 2026 — agenda, gallery, Culture Quest, and ticket registration.",
-      image: `${import.meta.env.BASE_URL}projects/global-village.png`,
+      image: `${import.meta.env.BASE_URL}projects/global-village-live.png`,
       photos: [
         `${import.meta.env.BASE_URL}projects/gv/gallery-1.jpg`,
         `${import.meta.env.BASE_URL}projects/gv/gallery-3.jpg`,
