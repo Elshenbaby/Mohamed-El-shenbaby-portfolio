@@ -26,7 +26,6 @@ function findCell(kind: number): Pos {
 }
 
 const START = findCell(2);
-const GOAL = findCell(3);
 
 type Phase = "intro" | "play" | "win";
 

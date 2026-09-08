@@ -43,7 +43,7 @@ a {
   font-family: var(--font-display);
 }
 
-/* Atmospheric field — grid + soft vignette, not flat fill */
+/* Atmospheric field: grid + soft vignette, not flat fill */
 .hero-field {
   background-color: var(--color-ink);
   background-image:
