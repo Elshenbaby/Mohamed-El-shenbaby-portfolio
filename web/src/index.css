@@ -189,6 +189,363 @@ a {
   border-color: var(--color-teal);
 }
 
+.arcade-cabinet {
+  border: 3px solid #1e3a42;
+  background:
+    linear-gradient(180deg, #12252c 0%, #0a1519 100%);
+  box-shadow:
+    0 0 0 1px #2ec4b6,
+    0 20px 50px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.arcade-marquee {
+  overflow: hidden;
+  border-bottom: 2px solid #2ec4b6;
+  background: #071014;
+  padding: 0.55rem 0;
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  color: #e8a838;
+  white-space: nowrap;
+}
+
+.arcade-marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: arcade-marquee 18s linear infinite;
+}
+
+@keyframes arcade-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.arcade-screen {
+  min-height: 28rem;
+  padding: 1rem 1rem 1.25rem;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(46, 196, 182, 0.12), transparent 55%),
+    #071014;
+}
+
+.arcade-hud {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.5rem;
+  color: #9bb4bc;
+}
+
+.arcade-title-chip {
+  color: #2ec4b6;
+}
+
+.arcade-board {
+  display: grid;
+  gap: 3px;
+  max-width: 22rem;
+  margin-inline: auto;
+  padding: 0.5rem;
+  border: 2px solid #1e3a42;
+  background: #040a0c;
+}
+
+.arcade-cell {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 2px;
+}
+
+.arcade-wall {
+  background: linear-gradient(145deg, #1a3d48, #0f242b);
+  box-shadow: inset 0 0 0 1px #2a5560;
+}
+
+.arcade-path {
+  background: #0a1418;
+}
+
+.arcade-goal {
+  background: rgba(232, 168, 56, 0.2);
+  box-shadow: 0 0 10px rgba(232, 168, 56, 0.35);
+}
+
+.arcade-player {
+  background: #2ec4b6 !important;
+  box-shadow: 0 0 14px rgba(46, 196, 182, 0.7);
+}
+
+.arcade-sprite {
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.45rem;
+  color: #071014;
+}
+
+.arcade-sprite.goal {
+  color: #e8a838;
+}
+
+.arcade-coin {
+  color: #e8a838;
+  font-size: 0.55rem;
+  animation: arcade-coin-pulse 1s ease-in-out infinite;
+}
+
+@keyframes arcade-coin-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.85);
+  }
+}
+
+.arcade-attract {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .arcade-attract {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+  }
+}
+
+.arcade-preview-wrap {
+  border: 2px dashed rgba(46, 196, 182, 0.45);
+  padding: 0.75rem;
+  background: rgba(16, 36, 43, 0.55);
+}
+
+.arcade-preview-label {
+  margin-bottom: 0.6rem;
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.45rem;
+  color: #2ec4b6;
+  text-align: center;
+}
+
+.arcade-preview-caption {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.42rem;
+  color: #9bb4bc;
+}
+
+.arcade-arrow {
+  color: #e8a838;
+}
+
+.arcade-attract-copy {
+  text-align: center;
+}
+
+.arcade-blink {
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: #e8a838;
+  margin: 0 0 1rem;
+}
+
+.arcade-blink.off {
+  opacity: 0.15;
+}
+
+.arcade-tagline {
+  margin: 0 auto 1rem;
+  max-width: 18rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #9bb4bc;
+}
+
+.arcade-bullets {
+  margin: 0 auto 1.25rem;
+  padding: 0;
+  list-style: none;
+  max-width: 18rem;
+  text-align: left;
+  color: #9bb4bc;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.arcade-bullets li::before {
+  content: ">";
+  color: #2ec4b6;
+  margin-right: 0.45rem;
+}
+
+.arcade-start-btn,
+.arcade-ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.25rem;
+  padding: 0.85rem 1.1rem;
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.55rem;
+  line-height: 1.4;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.arcade-start-btn {
+  color: #071014;
+  background: #2ec4b6;
+}
+
+.arcade-start-btn:hover {
+  background: #5ad9cd;
+}
+
+.arcade-ghost-btn {
+  color: #e8f4f2;
+  background: transparent;
+  border-color: #1e3a42;
+}
+
+.arcade-ghost-btn:hover {
+  border-color: #e8a838;
+  color: #e8a838;
+}
+
+.arcade-insert {
+  max-width: 22rem;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.arcade-insert-title {
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.65rem;
+  color: #e8a838;
+  margin-bottom: 1rem;
+}
+
+.arcade-input {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  border: 2px solid #2ec4b6;
+  background: #040a0c;
+  color: #e8f4f2;
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.6rem;
+  text-align: center;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.arcade-play-meta,
+.arcade-hint,
+.arcade-controls-bar {
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.45rem;
+  color: #9bb4bc;
+}
+
+.arcade-play-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.arcade-hint {
+  margin-top: 0.85rem;
+  text-align: center;
+}
+
+.arcade-pad {
+  margin: 1rem auto 0;
+  display: flex;
+  max-width: 180px;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.arcade-pad-row {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.arcade-win {
+  text-align: center;
+  padding: 1.5rem 0.5rem 1rem;
+}
+
+.arcade-win-banner {
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.7rem;
+  color: #2ec4b6;
+}
+
+.arcade-win-title {
+  margin: 1rem auto 0.75rem;
+  max-width: 28rem;
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: clamp(0.7rem, 2.4vw, 1rem);
+  line-height: 1.55;
+  color: #e8f4f2;
+}
+
+.arcade-win-score {
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.45rem;
+  color: #e8a838;
+}
+
+.arcade-win-copy {
+  margin: 1rem auto 0;
+  max-width: 28rem;
+  color: #9bb4bc;
+  line-height: 1.6;
+}
+
+.arcade-win-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.arcade-controls-bar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-top: 2px solid #1e3a42;
+  padding: 0.75rem;
+  background: #0a1519;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arcade-marquee span,
+  .arcade-coin {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

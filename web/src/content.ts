@@ -52,12 +52,44 @@ export const content = {
       href: "https://www.linkedin.com/in/mohamed-el-shenbaby-433a06244/",
     },
     { label: "GitHub", href: "https://github.com/Elshenbaby" },
+    {
+      label: "Behance",
+      href: "https://www.behance.net/mohamedayman120",
+    },
   ] satisfies Link[],
   contact: {
     email: "mohamedelshenbaby101@gmail.com",
     phone: "+20 122 592 8917",
     whatsapp: "https://wa.me/201225928917",
+    cv: `${import.meta.env.BASE_URL}Mohamed%20Elshenbaby%20CV.pdf`,
   },
+  platforms: [
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/mohamed-el-shenbaby-433a06244/",
+    },
+    { label: "GitHub", href: "https://github.com/Elshenbaby" },
+    {
+      label: "Behance",
+      href: "https://www.behance.net/mohamedayman120",
+    },
+    {
+      label: "WhatsApp",
+      href: "https://wa.me/201225928917",
+    },
+    {
+      label: "Email",
+      href: "mailto:mohamedelshenbaby101@gmail.com",
+    },
+    {
+      label: "Call",
+      href: "tel:+201225928917",
+    },
+    {
+      label: "Download CV",
+      href: `${import.meta.env.BASE_URL}Mohamed%20Elshenbaby%20CV.pdf`,
+    },
+  ] satisfies Link[],
   services: [
     {
       id: "crm-builds",

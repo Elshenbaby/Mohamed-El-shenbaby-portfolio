@@ -139,11 +139,27 @@ export function App() {
               >
                 Start a project
               </a>
+              <a href="#play" className="hero-cta cta-ghost">
+                Play the arcade
+              </a>
               <a href="#work" className="hero-cta cta-ghost">
                 See work
               </a>
             </div>
-            <p className="mt-8 text-xs uppercase tracking-[0.24em] text-mist/70">{content.location}</p>
+            <div className="hero-cta mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm text-mist">
+              {content.platforms.map((p) => (
+                <a
+                  key={p.label}
+                  href={p.href}
+                  target={p.href.startsWith("mailto:") || p.href.startsWith("tel:") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  className="underline-offset-4 transition hover:text-teal hover:underline"
+                >
+                  {p.label}
+                </a>
+              ))}
+            </div>
+            <p className="mt-6 text-xs uppercase tracking-[0.24em] text-mist/70">{content.location}</p>
           </div>
         </section>
 
@@ -379,13 +395,24 @@ export function App() {
               <a href={`mailto:${content.contact.email}`} className="cta-ghost">
                 Email
               </a>
+              <a href={`tel:${content.contact.phone.replace(/\s/g, "")}`} className="cta-ghost">
+                Call
+              </a>
+              <a
+                href={content.contact.cv}
+                className="cta-ghost"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download CV
+              </a>
             </div>
             <div className="reveal mt-8 flex flex-wrap justify-center gap-5 text-sm text-mist">
-              {content.links.map((link) => (
+              {content.platforms.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  target="_blank"
+                  target={link.href.startsWith("mailto:") || link.href.startsWith("tel:") ? undefined : "_blank"}
                   rel="noopener noreferrer"
                   className="hover:text-teal"
                 >
