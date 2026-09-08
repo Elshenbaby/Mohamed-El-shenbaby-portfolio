@@ -1,13 +1,182 @@
 @import "tailwindcss";
 
+@theme {
+  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #071014;
+  --color-ink-2: #0c1a1f;
+  --color-panel: #10242b;
+  --color-line: #1e3a42;
+  --color-mist: #9bb4bc;
+  --color-foam: #e8f4f2;
+  --color-teal: #2ec4b6;
+  --color-teal-dim: #1a8f85;
+  --color-amber: #e8a838;
+  --color-amber-dim: #b8791f;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  @apply m-0 min-h-screen bg-white text-slate-900 antialiased;
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  background: var(--color-ink);
+  color: var(--color-foam);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-teal) 45%, transparent);
+  color: var(--color-ink);
 }
 
 a {
-  @apply text-blue-600 hover:text-blue-800 underline underline-offset-2;
+  color: inherit;
+  text-decoration: none;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Atmospheric field — grid + soft vignette, not flat fill */
+.hero-field {
+  background-color: var(--color-ink);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 70% 20%, rgba(46, 196, 182, 0.16), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 15% 85%, rgba(232, 168, 56, 0.1), transparent 50%),
+    linear-gradient(180deg, rgba(7, 16, 20, 0.2) 0%, var(--color-ink) 100%),
+    linear-gradient(rgba(30, 58, 66, 0.45) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 58, 66, 0.45) 1px, transparent 1px);
+  background-size:
+    auto,
+    auto,
+    auto,
+    48px 48px,
+    48px 48px;
+}
+
+.hero-scan {
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 3px
+  );
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+}
+
+.quest-rail {
+  border-left: 1px solid var(--color-line);
+}
+
+.quest-node {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--color-teal);
+  box-shadow: 0 0 0 4px rgba(46, 196, 182, 0.18);
+}
+
+.board-tile {
+  background: color-mix(in oklab, var(--color-panel) 88%, transparent);
+  border: 1px solid var(--color-line);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.board-tile:hover {
+  border-color: color-mix(in oklab, var(--color-teal) 55%, var(--color-line));
+  background: color-mix(in oklab, var(--color-panel) 100%, var(--color-teal) 6%);
+}
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.35rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+  background: var(--color-teal);
+  border: 1px solid transparent;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cta-primary:hover {
+  background: color-mix(in oklab, var(--color-teal) 88%, white);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-teal) 40%, transparent);
+}
+
+.cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.35rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-foam);
+  border: 1px solid var(--color-line);
+  background: transparent;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.cta-ghost:hover {
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+  background: rgba(232, 168, 56, 0.06);
+}
+
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+}
+
+.case-featured {
+  background:
+    linear-gradient(135deg, rgba(46, 196, 182, 0.09), transparent 42%),
+    var(--color-ink-2);
+  border: 1px solid color-mix(in oklab, var(--color-teal) 35%, var(--color-line));
+}
+
+.stack-chip {
+  display: inline-flex;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--color-mist);
+  border: 1px solid var(--color-line);
+  background: rgba(16, 36, 43, 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-scan {
+    display: none;
+  }
 }

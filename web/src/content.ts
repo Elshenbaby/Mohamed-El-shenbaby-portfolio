@@ -3,175 +3,307 @@ export type Link = {
   href: string;
 };
 
-export type Experience = {
+export type Service = {
+  id: string;
+  label: string;
   title: string;
-  org: string;
-  location?: string;
-  date: string;
-  bullets: string[];
+  blurb: string;
 };
 
-export type Project = {
+export type CaseStudy = {
+  id: string;
+  quest: string;
   name: string;
-  subtitle: string;
-  bullets: string[];
-  tech: string[];
+  role: string;
+  summary: string;
+  problem: string;
+  build: string[];
+  outcomes: string[];
+  stack: string[];
+  featured?: boolean;
   links?: Link[];
 };
 
+export type OtherWork = {
+  title: string;
+  org: string;
+  date: string;
+  note: string;
+};
+
+export type ProcessStep = {
+  step: string;
+  title: string;
+  blurb: string;
+};
+
 export const content = {
-  name: "Mohamed Elshenaby",
+  name: "Mohamed El-Shenbaby",
   location: "Cairo, Egypt",
-  headline:
-    "Product & Data Analyst • Growth/Marketing • AI Engineering Student • Designer",
+  role: "Django CRM engineer",
+  headline: "I design, build, and deploy custom CRMs and operational platforms.",
   summary:
-    "Product-oriented data analyst with hands-on experience building analytics systems, KPI dashboards, and automation used in real operational environments. I connect user behavior, business strategy, and data engineering to turn raw data into decision-making systems.",
+    "Freelance Django software engineer focused on CRM / AMS builds, legacy migrations, and production ops tooling. Best proof: Soluo — a national Django CRM that replaced Podio for AIESEC Egypt.",
   links: [
     {
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/mohamed-el-shenbaby-433a06244/",
     },
     { label: "GitHub", href: "https://github.com/Elshenbaby" },
-    {
-      label: "Behance",
-      href: "https://www.behance.net/mohamedayman120",
-    },
   ] satisfies Link[],
   contact: {
     email: "mohamedelshenbaby101@gmail.com",
     phone: "+20 122 592 8917",
+    whatsapp: "https://wa.me/201225928917",
   },
-  highlights: [
-    "Led PR for an 800+ attendee event; secured 30+ influencers and 10+ media partners.",
-    "Drove 3000+ leads and partnerships with 10+ organizations through marketing, PR, and sales roles.",
-    "Conducted 1000+ user interviews; used insights + analysis to optimize campaigns and customer experience.",
-    "Managed and developed teams up to 30 members across online/offline campaigns.",
-  ],
-  skills: {
-    "Data & Analytics": [
-      "SQL",
-      "Data Modeling",
-      "Power BI",
-      "Tableau",
-      "Funnel Analysis",
-      "KPI Design & Tracking",
-      "Machine Learning Fundamentals",
-    ],
-    "Backend & Automation": [
-      "Python",
-      "Django",
-      "PostgreSQL",
-      "Redis",
-      "Celery",
-      "Docker",
-      "Google Apps Script",
-      "REST APIs",
-    ],
-    "Product & Growth": [
-      "Product Thinking",
-      "Growth Strategy",
-      "Market Research",
-      "User Research",
-      "Campaign Strategy",
-    ],
-    "Design": ["Graphic Design", "Video Editing"],
+  services: [
+    {
+      id: "crm-builds",
+      label: "Loadout 01",
+      title: "Custom CRM / AMS builds",
+      blurb:
+        "Django + HTMX + Postgres systems for pipelines, membership, approvals, and day-to-day ops — built to ship, not sit in a slide deck.",
+    },
+    {
+      id: "migration-deploy",
+      label: "Loadout 02",
+      title: "CRM migration & production deploy",
+      blurb:
+        "Podio / legacy → Docker / Coolify. Import, dedupe, sync rules, and a clean cutover so teams keep working while the stack upgrades.",
+    },
+    {
+      id: "ops-automation",
+      label: "Loadout 03",
+      title: "Ops dashboards & workflow automation",
+      blurb:
+        "KPI boards, API sync, notifications, and n8n / webhook bridges that turn scattered ops into one reliable loop.",
+    },
+  ] satisfies Service[],
+  caseStudies: [
+    {
+      id: "soluo",
+      quest: "Main quest",
+      name: "Soluo — AIESEC Egypt EMS",
+      role: "Django CRM · Podio migration · production deploy",
+      summary:
+        "National membership & company CRM that replaced Podio AMS. Live at soluo.aiesec.org.eg.",
+      problem:
+        "AIESEC Egypt ran core B2C / company ops on Podio AMS — brittle at national scale, hard to extend, and expensive to keep as the system of record.",
+      build: [
+        "Designed and shipped a Django 5 + HTMX + Postgres CRM for companies, deals, claim/stale rules, and membership roster.",
+        "Built Podio import plus create-only API sync, fuzzy dedupe, notifications, analytics, and n8n webhook hooks.",
+        "Packaged with Gunicorn + Docker and deployed on Coolify for a production cutover.",
+      ],
+      outcomes: [
+        "Production CRM live for national ops at soluo.aiesec.org.eg",
+        "Podio AMS replaced as the primary membership / company system",
+        "Import + sync path for large historical company datasets without inventing vanity metrics",
+      ],
+      stack: [
+        "Django 5",
+        "HTMX",
+        "PostgreSQL",
+        "Gunicorn",
+        "Docker",
+        "Coolify",
+        "n8n",
+      ],
+      featured: true,
+      links: [
+        { label: "Live", href: "https://soluo.aiesec.org.eg" },
+        {
+          label: "Repo",
+          href: "https://github.com/AIESEC-Egypt/New-Podio",
+        },
+      ],
+    },
+    {
+      id: "global-village-26",
+      quest: "Quest 02",
+      name: "Global Village 26",
+      role: "Event web platform · AIESEC Egypt",
+      summary:
+        "Public web experience for AIESEC Egypt’s Global Village 2026 cultural-exchange event — landing, event narrative, and registration intake.",
+      problem:
+        "The national event needed a modern public site that could carry the story and collect registrations for ops — not a one-page brochure.",
+      build: [
+        "Shipped the Global Village 26 event site as a React front-end (private AIESEC Egypt repo).",
+        "Structured the public funnel around event storytelling and registration handoff for volunteer / marketing ops.",
+      ],
+      outcomes: [
+        "Live event funnel for Global Village 2026 under AIESEC Egypt",
+        "Registration path connected to event ops intake",
+      ],
+      stack: ["React", "TypeScript", "Vite"],
+      links: [
+        {
+          label: "Repo",
+          href: "https://github.com/AIESEC-Egypt/Global-village-26",
+        },
+      ],
+    },
+    {
+      id: "iris",
+      quest: "Quest 03",
+      name: "IRIS — OGX Analytics Dashboard",
+      role: "Django KPI / ops dashboard",
+      summary:
+        "National OGX analytics platform tracking pipeline performance across AIESEC Egypt’s local committees.",
+      problem:
+        "Leadership needed real-time visibility into OGX pipeline health across 19 LCs — product mix, rankings, YoY, and channel attribution — without spreadsheet sprawl.",
+      build: [
+        "Built Django dashboards for national KPIs, product breakdowns, LC rankings, and deep-dive views.",
+        "Automated GraphQL sync from EXPA & Alpha via Celery Beat; Redis for cache/queue.",
+        "Deployed with Docker + Gunicorn + WhiteNoise.",
+      ],
+      outcomes: [
+        "Single source of truth for national OGX KPIs",
+        "Automated refresh instead of manual report pulls",
+        "Live at iris.aiesec.org.eg",
+      ],
+      stack: [
+        "Django 5.2",
+        "PostgreSQL",
+        "Redis",
+        "Celery",
+        "GraphQL",
+        "Chart.js",
+        "Docker",
+      ],
+      links: [{ label: "Live", href: "https://iris.aiesec.org.eg/" }],
+    },
+    {
+      id: "datawallet",
+      quest: "Quest 04",
+      name: "DataWallet",
+      role: "Full-stack Django + BI",
+      summary:
+        "DEPI graduation platform that turns spending data into a BI-backed financial insight system.",
+      problem:
+        "Personal and cohort financial data lived in scattered sheets — no modeled store, no YoY view, no embedded analytics in one product.",
+      build: [
+        "Designed a SQL data model and Django web app for tracking and analysis.",
+        "Embedded Power BI dashboards and YoY financial views on top of the backend.",
+        "Shipped full frontend and backend as a cohesive BI platform.",
+      ],
+      outcomes: [
+        "End-to-end Django + Power BI financial analytics product",
+        "Reusable pattern for embedding BI inside an ops web app",
+      ],
+      stack: ["Django", "PostgreSQL / SQLite", "Power BI", "Celery", "Redis", "Docker"],
+    },
+    {
+      id: "tanta-podio",
+      quest: "Quest 05",
+      name: "Tanta Club Portal & Podio CRM automation",
+      role: "Supporting engineering proof",
+      summary:
+        "Booking portal work plus earlier Apps Script / Podio pipelines that informed the Soluo migration path.",
+      problem:
+        "Ops teams needed calendar booking UX and CRM validation / approval flows before a full Django CRM existed.",
+      build: [
+        "Built a responsive booking experience with calendar-based reservations (React + TypeScript).",
+        "Earlier: Google Apps Script automation for Podio — pipelines, validation, approvals, fuzzy duplicate detection across branches.",
+      ],
+      outcomes: [
+        "Hands-on CRM workflow automation before the Soluo rebuild",
+        "Frontend booking proof alongside backend ops tooling",
+      ],
+      stack: [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Google Apps Script",
+        "Podio API",
+      ],
+      links: [
+        {
+          label: "Podio automation",
+          href: "https://github.com/Elshenbaby/podio-b2c-automation-approval-engine",
+        },
+      ],
+    },
+  ] satisfies CaseStudy[],
+  stack: {
+    Core: ["Python", "Django", "HTMX", "PostgreSQL", "REST APIs"],
+    "Ship & run": ["Docker", "Gunicorn", "Coolify", "Redis", "Celery"],
+    "Ops glue": ["n8n", "Google Apps Script", "GraphQL", "Power BI"],
+    Frontend: ["React", "TypeScript", "Tailwind CSS"],
   } as Record<string, string[]>,
-  experience: [
+  process: [
     {
-      title: "Brand Experience Director (Marketing & B2C)",
-      org: "AIESEC in Egypt",
-      date: "Jul 2025 – Present",
-      bullets: [
-        "Lead national B2C strategy; drive user acquisition and engagement across Egypt.",
-        "Design end-to-end user journeys and execute data-driven marketing campaigns.",
-        "Build KPI tracking systems and dashboards; align cross-functional teams using market insights.",
-      ],
+      step: "01",
+      title: "Map the ops",
+      blurb:
+        "Pipelines, roles, and failure points — what the CRM must protect before a single model ships.",
     },
     {
-      title: "Marketing & Sales Leadership (Volunteer)",
-      org: "AIESEC in Egypt",
-      date: "Feb 2025 – May 2025",
-      bullets: [
-        "Led marketing, PR, and sales initiatives; contributed to 3000+ leads and partnerships with 10+ organizations.",
-        "Managed and developed teams (up to 30 members) executing online/offline campaigns.",
-      ],
+      step: "02",
+      title: "Build the core loop",
+      blurb:
+        "Django models, HTMX flows, and the daily path users actually click — not a feature cemetery.",
     },
+    {
+      step: "03",
+      title: "Migrate & harden",
+      blurb:
+        "Import, dedupe, sync rules, and staging cutovers so legacy data survives the move.",
+    },
+    {
+      step: "04",
+      title: "Deploy & hand off",
+      blurb:
+        "Docker / Coolify production, monitoring hooks, and docs your team can run without me in the room.",
+    },
+  ] satisfies ProcessStep[],
+  otherWork: [
     {
       title: "Head of Public Relations (Y2B v2)",
       org: "AIESEC in Egypt",
       date: "Feb 2025 – Jul 2025",
-      bullets: [
-        "Led PR for an 800+ attendee event.",
-        "Secured 30+ influencers and 10+ media partners.",
-      ],
+      note: "PR for 800+ attendee national event; 30+ influencers and 10+ media partners.",
     },
     {
-      title: "Co-Founder",
-      org: "Sarmady Events",
-      date: "Jul 2024 – Oct 2024",
-      bullets: [
-        "Founded and managed an event agency across operations, marketing, and partnerships.",
-        "Launched events exceeding attendance and engagement targets.",
-      ],
+      title: "Marketing & Sales Leadership",
+      org: "AIESEC in Egypt",
+      date: "Feb 2025 – May 2025",
+      note: "Campaigns and team leadership contributing to 3000+ leads and multi-org partnerships.",
+    },
+    {
+      title: "Brand Experience Director (Marketing & B2C)",
+      org: "AIESEC in Egypt",
+      date: "Jul 2025 – Present",
+      note: "National B2C strategy, journeys, and KPI systems across Egypt.",
+    },
+    {
+      title: "GAME ON — Sarmady Events",
+      org: "Sarmady Events (Co-Founder)",
+      date: "2024",
+      note: "Tanta’s first board-games event; partners, sponsors, and profitable ticket sell-through.",
     },
     {
       title: "Brand Representative",
       org: "Goodsmart",
-      date: "Feb 2023 – Feb 2025",
-      bullets: [
-        "Represented the brand at events and promotions; supported marketing and business development.",
-      ],
-    },
-  ] satisfies Experience[],
-  projects: [
-    {
-      name: "DataWallet – Financial Analytics Platform",
-      subtitle: "Full-stack tracking + analytics for financial behavior",
-      bullets: [
-        "Built a full-stack system for tracking and analyzing financial behavior.",
-        "Designed a SQL data model and interactive dashboards for decision-making.",
-        "Integrated Power BI into a web-based platform.",
-      ],
-      tech: ["Django", "PostgreSQL", "Celery", "Redis", "Docker"],
+      date: "2023 – 2025",
+      note: "Event and promo representation supporting marketing and BD.",
     },
     {
-      name: "IRIS – Analytics & KPI Dashboard Platform",
-      subtitle: "Multi-location KPI monitoring with drill-down insights",
-      bullets: [
-        "Built an analytics platform to monitor multi-location performance.",
-        "Developed KPI dashboards, funnel tracking, and drill-down insights.",
-        "Applied data-quality rules and automated data refresh.",
-      ],
-      tech: ["Django", "SQLite", "Power BI", "Python"],
+      title: "Graphic design",
+      org: "Independent",
+      date: "Ongoing",
+      note: "Visual work for campaigns and products — secondary to software delivery.",
     },
-    {
-      name: "B2C CRM Automation (Podio Integration)",
-      subtitle: "API-based CRM workflows + validation",
-      bullets: [
-        "Built an automation system for CRM data processing.",
-        "Developed pipelines, validation logic, and approval workflows.",
-        "Implemented duplicate detection using fuzzy matching.",
-      ],
-      tech: ["Google Apps Script", "REST APIs"],
-    },
-    {
-      name: "Tanta Club Portal – Booking System",
-      subtitle: "Responsive booking with calendar-based reservations",
-      bullets: [
-        "Developed a booking platform with calendar-based reservations.",
-        "Built a scalable frontend using React and TypeScript.",
-      ],
-      tech: ["React", "TypeScript", "Tailwind CSS"],
-    },
-  ] satisfies Project[],
+  ] satisfies OtherWork[],
+  about:
+    "AI Engineering student at Tanta University who ships production Django systems for real orgs. I care about CRMs that ops teams actually use — migration paths, deploy discipline, and interfaces that don’t fight the workflow.",
   education: [
     {
       title: "B.Sc. in Artificial Intelligence Engineering",
       org: "Tanta University",
-      date: "2022 – 2027 • Currently studying",
+      date: "2022 – 2027",
     },
     {
-      title: "Digital Egypt Pioneers Initiative (DEPI) – Data Analytics Track",
+      title: "DEPI — Data Analytics Track",
       org: "MCIT",
       date: "Certification",
     },

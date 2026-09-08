@@ -36,11 +36,13 @@ jobs:
         run: npm run build
         working-directory: web
 
-      - name: Copy custom portfolio page and CV
+      - name: Copy CV and static assets
         run: |
-          cp web/public/portfolio.html web/dist/portfolio.html
-          cp web/public/portfolio.html web/dist/index.html
-          if [ -f "Mohamed Elshenbaby CV.pdf" ]; then cp "Mohamed Elshenbaby CV.pdf" "web/dist/Mohamed Elshenbaby CV.pdf"; fi
+          # Vite already emits dist/index.html from the React entry and copies
+          # web/public/* (including portfolio.html redirect). Do not overwrite index.
+          if [ -f "Mohamed Elshenbaby CV.pdf" ]; then
+            cp "Mohamed Elshenbaby CV.pdf" "web/dist/Mohamed Elshenbaby CV.pdf"
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
