@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const navItems = [
   { label: "Work", href: "#work" },
+  { label: "Maintained", href: "#maintained" },
   { label: "Skills", href: "#skills" },
   { label: "Play", href: "#play" },
   { label: "Automations", href: "#automations" },
@@ -336,6 +337,58 @@ export function App() {
                         ))}
                       </div>
                     )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="maintained" className="border-t border-line bg-ink-2 py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+            <p className="section-label reveal">Also shipping</p>
+            <h2 className="reveal mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+              Projects I contributed to & maintained
+            </h2>
+            <p className="reveal mt-3 max-w-2xl text-mist">
+              Live platforms I helped construct, extend, or keep running in production.
+            </p>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+              {content.maintained.map((item) => (
+                <article
+                  key={item.id}
+                  className="reveal overflow-hidden border border-line bg-ink"
+                >
+                  {item.image && (
+                    <div className="aspect-[16/10] overflow-hidden border-b border-line">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="h-full w-full object-cover object-top transition duration-500 hover:scale-[1.03]"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div className="flex flex-col p-5 sm:p-6">
+                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-teal">
+                      {item.role}
+                    </p>
+                    <h3 className="mt-3 font-display text-2xl font-bold text-foam">{item.name}</h3>
+                    <p className="mt-1 text-sm text-amber">{item.tagline}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-mist">{item.blurb}</p>
+                    <div className="mt-5 flex flex-wrap gap-3">
+                      {item.links.map((link) => (
+                        <a
+                          key={link.label}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-semibold text-teal underline-offset-4 hover:underline"
+                        >
+                          {link.label} →
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </article>
               ))}

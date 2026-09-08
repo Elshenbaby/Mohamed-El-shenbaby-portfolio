@@ -21,6 +21,16 @@ export type CaseStudy = {
   links?: Link[];
 };
 
+export type MaintainedProject = {
+  id: string;
+  name: string;
+  tagline: string;
+  blurb: string;
+  image?: string;
+  role: string;
+  links: Link[];
+};
+
 export type Automation = {
   id: string;
   title: string;
@@ -225,6 +235,48 @@ export const content = {
       ],
     },
   ] satisfies CaseStudy[],
+  maintained: [
+    {
+      id: "core",
+      name: "CORE",
+      tagline: "National analytics dashboard",
+      blurb:
+        "Large-scale performance analytics across countries, regions, and local terms. KPI boards, rankings, and term views so leadership can track results in one place.",
+      image: `${import.meta.env.BASE_URL}projects/maintained-core.png`,
+      role: "Contributed & maintained",
+      links: [{ label: "Live site", href: "https://core.aiesec.org.eg/" }],
+    },
+    {
+      id: "where-it-all-begins",
+      name: "Where it all begins",
+      tagline: "Experience Egypt story site",
+      blurb:
+        "Public story site that sells the Egypt experience and guides visitors into volunteer, talent, and teacher program pathways.",
+      image: `${import.meta.env.BASE_URL}projects/maintained-where.png`,
+      role: "Contributed & maintained",
+      links: [{ label: "Live site", href: "https://whereitallbegins.aiesec.org.eg/" }],
+    },
+    {
+      id: "impact",
+      name: "IMPACT",
+      tagline: "Internal knowledge hub",
+      blurb:
+        "Member hub for learning resources, function academies, contracts, conferences, ranking, and certificate flows. One place to learn and operate.",
+      image: `${import.meta.env.BASE_URL}projects/maintained-impact.png`,
+      role: "Contributed & maintained",
+      links: [{ label: "Live site", href: "https://impact.aiesec.org.eg/" }],
+    },
+    {
+      id: "raised",
+      name: "RAISED",
+      tagline: "Commission ranking board",
+      blurb:
+        "Live B2B commission ranking across branches. Visual standings by product line so teams see who is leading and act faster.",
+      image: `${import.meta.env.BASE_URL}projects/maintained-raised.png`,
+      role: "Contributed & maintained",
+      links: [{ label: "Live site", href: "https://raised.aiesec.org.eg/" }],
+    },
+  ] satisfies MaintainedProject[],
   automations: [
     {
       id: "n8n-new-company",
