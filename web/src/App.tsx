@@ -261,7 +261,21 @@ export function App() {
                 </p>
                 <h3 className="mt-3 font-display text-3xl font-bold tracking-tight">{featured.name}</h3>
                 <p className="mt-1 text-sm text-amber">{featured.tagline}</p>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-mist">{featured.blurb}</p>
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mist/75">
+                  <span className="font-semibold text-foam">The problem: </span>
+                  {featured.problem}
+                </p>
+                <p className="mt-3 max-w-2xl text-base leading-relaxed text-mist">{featured.blurb}</p>
+                {featured.highlights && featured.highlights.length > 0 && (
+                  <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5">
+                    {featured.highlights.map((h) => (
+                      <li key={h} className="flex items-center gap-1.5 text-xs text-mist/70">
+                        <span className="h-1 w-1 rounded-full bg-teal" aria-hidden />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <div className="mt-5 flex flex-wrap gap-2">
                   {featured.stack.map((tech) => (
                     <span key={tech} className="stack-chip">
@@ -314,7 +328,21 @@ export function App() {
                   <div className="p-5 sm:p-6">
                     <h3 className="font-display text-xl font-bold">{study.name}</h3>
                     <p className="mt-1 text-sm text-amber">{study.tagline}</p>
-                    <p className="mt-3 text-sm leading-relaxed text-mist">{study.blurb}</p>
+                    <p className="mt-3 text-xs leading-relaxed text-mist/65">
+                      <span className="font-semibold text-foam/90">The problem: </span>
+                      {study.problem}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-mist">{study.blurb}</p>
+                    {study.highlights && study.highlights.length > 0 && (
+                      <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
+                        {study.highlights.map((h) => (
+                          <li key={h} className="flex items-center gap-1.5 text-[11px] text-mist/60">
+                            <span className="h-1 w-1 rounded-full bg-teal" aria-hidden />
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     <div className="mt-4 flex flex-wrap gap-2">
                       {study.stack.map((tech) => (
                         <span key={tech} className="stack-chip">

@@ -13,9 +13,11 @@ export type CaseStudy = {
   id: string;
   name: string;
   tagline: string;
+  problem: string;
   blurb: string;
   image: string;
   photos?: string[];
+  highlights?: string[];
   stack: string[];
   featured?: boolean;
   links?: Link[];
@@ -181,9 +183,17 @@ export const content = {
       id: "soluo",
       name: "Soluo",
       tagline: "Custom CRM platform",
+      problem:
+        "Growth teams were tracking companies, deals, and membership across scattered spreadsheets. No single source of truth, no pipeline view, and every report meant someone manually pulling numbers together.",
       blurb:
         "Rebuilt a legacy CRM into a full Django system for companies, deals, membership, and live sync. Now running in production.",
       image: `${import.meta.env.BASE_URL}projects/soluo.png`,
+      highlights: [
+        "Company & deal pipeline",
+        "Membership records",
+        "Approval workflows",
+        "Live data sync",
+      ],
       stack: ["Django", "PostgreSQL", "Docker"],
       featured: true,
       links: [{ label: "Live site", href: "https://soluo.aiesec.org.eg" }],
@@ -192,9 +202,12 @@ export const content = {
       id: "global-village-26",
       name: "Global Village 26",
       tagline: "Event website & registration",
+      problem:
+        "Event info and sign-ups were spread across social posts and a plain form, with no central site and no clean way to get registrations into the sheets the ops team already ran on.",
       blurb:
         "Live event site with agenda, gallery, Culture Quest, and ticket registration wired to Google Sheets and Drive.",
       image: `${import.meta.env.BASE_URL}projects/global-village-live.png`,
+      highlights: ["Agenda", "Photo gallery", "Culture Quest", "Ticket registration"],
       photos: [
         `${import.meta.env.BASE_URL}projects/gv/gallery-1.jpg`,
         `${import.meta.env.BASE_URL}projects/gv/gallery-3.jpg`,
@@ -215,9 +228,12 @@ export const content = {
       id: "iris",
       name: "IRIS",
       tagline: "Analytics dashboard",
+      problem:
+        "Tracking performance across countries, regions, and local teams meant rebuilding the same spreadsheets and slide decks every week, so leadership only ever saw outdated snapshots.",
       blurb:
         "Performance dashboard so leadership can see pipeline health in one place. Auto-refreshed, not hand-built sheets.",
       image: `${import.meta.env.BASE_URL}projects/iris.png`,
+      highlights: ["Rankings by branch", "Local committee deep dives", "Term comparisons", "Achiever tracking"],
       stack: ["Django", "PostgreSQL", "Redis"],
       links: [{ label: "Live site", href: "https://iris.aiesec.org.eg/" }],
     },
@@ -225,8 +241,11 @@ export const content = {
       id: "omar-web",
       name: "Omar's Journey",
       tagline: "Interactive portfolio site",
+      problem:
+        "A final internship report is usually a slide deck nobody remembers past the presentation. The client wanted his Boehringer Ingelheim internship to actually stick with whoever reviewed it.",
       blurb:
         "Arcade-styled portfolio for a client internship story: playable levels, mini-games, and a photo finale instead of a slide deck.",
+      highlights: ["Start screen", "Office level", "Site visits", "Pharmacy floor", "Photo finale"],
       image: `${import.meta.env.BASE_URL}projects/omar-web.png`,
       stack: ["React", "TypeScript", "Vite"],
       links: [
