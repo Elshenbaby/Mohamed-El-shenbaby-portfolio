@@ -21,6 +21,14 @@ export type CaseStudy = {
   links?: Link[];
 };
 
+export type Automation = {
+  id: string;
+  title: string;
+  blurb: string;
+  stack: string[];
+  links?: Link[];
+};
+
 export type OtherWork = {
   title: string;
   org: string;
@@ -67,14 +75,14 @@ export const content = {
       id: "dashboards",
       title: "Dashboards & automation",
       blurb:
-        "Live KPI boards, sync jobs, and workflow hooks so reporting stops living in chat threads.",
+        "Live KPI boards, n8n workflows, and Apps Script / Sheets hooks so reporting stops living in chat threads.",
     },
   ] satisfies Service[],
   caseStudies: [
     {
       id: "soluo",
       name: "Soluo",
-      tagline: "National CRM for AIESEC Egypt",
+      tagline: "Custom CRM platform",
       blurb:
         "Replaced an aging Podio setup with a full Django CRM — companies, deals, membership, and live sync — now running in production.",
       image: `${import.meta.env.BASE_URL}projects/soluo.png`,
@@ -89,7 +97,7 @@ export const content = {
       name: "Global Village 26",
       tagline: "Event website & registration",
       blurb:
-        "Live event site for AIESEC Egypt’s Global Village 2026 — agenda, gallery, Culture Quest, and ticket registration.",
+        "Live event site with agenda, gallery, Culture Quest, and ticket registration wired to Google Sheets and Drive.",
       image: `${import.meta.env.BASE_URL}projects/global-village-live.png`,
       photos: [
         `${import.meta.env.BASE_URL}projects/gv/gallery-1.jpg`,
@@ -112,30 +120,56 @@ export const content = {
       name: "IRIS",
       tagline: "Analytics dashboard",
       blurb:
-        "National performance dashboard so leadership can see pipeline health across Egypt in one place — auto-refreshed, not hand-built sheets.",
+        "Performance dashboard so leadership can see pipeline health in one place — auto-refreshed, not hand-built sheets.",
       image: `${import.meta.env.BASE_URL}projects/iris.png`,
       stack: ["Django", "PostgreSQL", "Redis"],
       links: [{ label: "Live site", href: "https://iris.aiesec.org.eg/" }],
     },
     {
-      id: "datawallet",
-      name: "DataWallet",
-      tagline: "Finance tracking platform",
+      id: "omar-web",
+      name: "Omar’s Journey",
+      tagline: "Interactive portfolio site",
       blurb:
-        "Full-stack app that turns spending data into clear dashboards with Power BI embedded in the product.",
-      image: `${import.meta.env.BASE_URL}projects/datawallet.png`,
-      stack: ["Django", "Power BI", "PostgreSQL"],
-    },
-    {
-      id: "tanta-podio",
-      name: "Booking & CRM automation",
-      tagline: "Portal + workflow tools",
-      blurb:
-        "Calendar booking experience plus earlier Podio automation — approvals, validation, and duplicate checks that led into Soluo.",
-      image: `${import.meta.env.BASE_URL}projects/automation.png`,
-      stack: ["React", "Apps Script", "Podio API"],
+        "Arcade-styled portfolio for a client internship story — playable levels, mini-games, and a photo finale instead of a slide deck.",
+      image: `${import.meta.env.BASE_URL}projects/omar-web.png`,
+      stack: ["React", "TypeScript", "Vite"],
+      links: [
+        { label: "Live site", href: "https://elshenbaby.github.io/Omar-Web/" },
+        { label: "Repo", href: "https://github.com/Elshenbaby/Omar-Web" },
+      ],
     },
   ] satisfies CaseStudy[],
+  automations: [
+    {
+      id: "n8n-new-company",
+      title: "New company intake",
+      blurb:
+        "When a new company is created in the CRM, an n8n workflow picks it up and routes the data into the next ops step automatically.",
+      stack: ["n8n", "Webhooks", "CRM"],
+      links: [{ label: "n8n", href: "https://n8n.aiesec.org.eg" }],
+    },
+    {
+      id: "n8n-deals-sync",
+      title: "Deal pipeline sync",
+      blurb:
+        "Create, update, and delete events on deals fire an n8n workflow that keeps the deal index and downstream tools in sync.",
+      stack: ["n8n", "Webhooks", "CRM"],
+      links: [{ label: "n8n", href: "https://n8n.aiesec.org.eg" }],
+    },
+    {
+      id: "crm-approvals",
+      title: "CRM approval engine",
+      blurb:
+        "Apps Script automation for CRM validation, approvals, and duplicate checks across branches — the workflow layer before the full Django CRM rebuild.",
+      stack: ["Apps Script", "Sheets", "REST APIs"],
+      links: [
+        {
+          label: "Repo",
+          href: "https://github.com/Elshenbaby/podio-b2c-automation-approval-engine",
+        },
+      ],
+    },
+  ] satisfies Automation[],
   otherWork: [
     {
       title: "Head of Public Relations (Y2B)",

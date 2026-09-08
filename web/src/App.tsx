@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const navItems = [
   { label: "Work", href: "#work" },
+  { label: "Automations", href: "#automations" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -286,7 +287,49 @@ export function App() {
           </div>
         </section>
 
-        <section id="other" className="border-t border-line py-16 sm:py-20">
+        <section id="automations" className="border-t border-line py-16 sm:py-20">
+          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+            <p className="section-label reveal">Automations</p>
+            <h2 className="reveal mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+              n8n, Sheets & workflows
+            </h2>
+            <p className="reveal mt-3 max-w-xl text-mist">
+              Production automations that move CRM data without manual copy-paste.
+            </p>
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {content.automations.map((item) => (
+                <article key={item.id} className="reveal border border-line bg-ink-2 p-5 sm:p-6">
+                  <h3 className="font-display text-xl font-bold text-foam">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-mist">{item.blurb}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {item.stack.map((tech) => (
+                      <span key={tech} className="stack-chip">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  {item.links && item.links.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-3">
+                      {item.links.map((link) => (
+                        <a
+                          key={link.label}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-semibold text-teal underline-offset-4 hover:underline"
+                        >
+                          {link.label} →
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="other" className="border-t border-line bg-ink-2 py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <p className="section-label reveal">Also</p>
             <h2 className="reveal mt-3 font-display text-2xl font-bold tracking-tight sm:text-3xl">
