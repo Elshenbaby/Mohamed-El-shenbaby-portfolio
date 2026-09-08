@@ -184,7 +184,7 @@ export const content = {
       name: "Soluo",
       tagline: "Custom CRM platform",
       problem:
-        "Growth teams were tracking companies, deals, and membership across scattered spreadsheets. No single source of truth, no pipeline view, and every report meant someone manually pulling numbers together.",
+        "Every Local Committee ran accounts, deals, and membership through Podio. No shared flow across committees, no single source of truth, and every report meant someone manually pulling numbers together.",
       blurb:
         "Rebuilt a legacy CRM into a full Django system for companies, deals, membership, and live sync. Now running in production.",
       image: `${import.meta.env.BASE_URL}projects/soluo.png`,
@@ -247,6 +247,10 @@ export const content = {
         "Arcade-styled portfolio for a client internship story: playable levels, mini-games, and a photo finale instead of a slide deck.",
       highlights: ["Start screen", "Office level", "Site visits", "Pharmacy floor", "Photo finale"],
       image: `${import.meta.env.BASE_URL}projects/omar-web.png`,
+      photos: [
+        `${import.meta.env.BASE_URL}projects/omar/level-map.png`,
+        `${import.meta.env.BASE_URL}projects/omar/level-finale.png`,
+      ],
       stack: ["React", "TypeScript", "Vite"],
       links: [
         { label: "Live site", href: "https://elshenbaby.github.io/Omar-Web/" },

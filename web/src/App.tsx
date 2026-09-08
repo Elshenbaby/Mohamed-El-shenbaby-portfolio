@@ -311,20 +311,30 @@ export function App() {
                       className="h-full w-full object-cover object-top transition duration-500 hover:scale-[1.03]"
                     />
                   </div>
-                  {study.photos && study.photos.length > 0 && (
-                    <div className="grid grid-cols-3 gap-1 border-b border-line bg-ink-2 p-1 sm:grid-cols-5">
-                      {study.photos.map((photo) => (
-                        <div key={photo} className="aspect-square overflow-hidden">
-                          <img
-                            src={photo}
-                            alt=""
-                            className="h-full w-full object-cover"
-                            loading="lazy"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                  {study.photos && study.photos.length > 0 && (() => {
+                    const isSnapshotGrid = study.photos.length > 3;
+                    return (
+                      <div
+                        className={`grid gap-1 border-b border-line bg-ink-2 p-1 ${
+                          isSnapshotGrid ? "grid-cols-3 sm:grid-cols-5" : "grid-cols-2"
+                        }`}
+                      >
+                        {study.photos.map((photo) => (
+                          <div
+                            key={photo}
+                            className={`overflow-hidden ${isSnapshotGrid ? "aspect-square" : "aspect-video"}`}
+                          >
+                            <img
+                              src={photo}
+                              alt=""
+                              className="h-full w-full object-cover object-top"
+                              loading="lazy"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
                   <div className="p-5 sm:p-6">
                     <h3 className="font-display text-xl font-bold">{study.name}</h3>
                     <p className="mt-1 text-sm text-amber">{study.tagline}</p>
