@@ -15,6 +15,7 @@ export type CaseStudy = {
   tagline: string;
   blurb: string;
   image: string;
+  photos?: string[];
   stack: string[];
   featured?: boolean;
   links?: Link[];
@@ -88,10 +89,18 @@ export const content = {
       name: "Global Village 26",
       tagline: "Event website & registration",
       blurb:
-        "Interactive event site with agenda, gallery, and a real registration flow into Google Sheets and Drive.",
+        "Live event site for AIESEC Egypt’s Global Village 2026 — agenda, gallery, Culture Quest, and ticket registration.",
       image: `${import.meta.env.BASE_URL}projects/global-village.png`,
+      photos: [
+        `${import.meta.env.BASE_URL}projects/gv/gallery-1.jpg`,
+        `${import.meta.env.BASE_URL}projects/gv/about-1.webp`,
+        `${import.meta.env.BASE_URL}projects/gv/about-2.webp`,
+        `${import.meta.env.BASE_URL}projects/gv/gallery-2.jpg`,
+        `${import.meta.env.BASE_URL}projects/gv/about-3.webp`,
+      ],
       stack: ["React", "TypeScript", "Vite"],
       links: [
+        { label: "Live site", href: "https://globalvillage.aiesec.org.eg/" },
         {
           label: "Repo",
           href: "https://github.com/AIESEC-Egypt/Global-village-26",
