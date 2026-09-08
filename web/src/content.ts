@@ -121,20 +121,29 @@ export const content = {
       id: "global-village-26",
       quest: "Quest 02",
       name: "Global Village 26",
-      role: "Event web platform · AIESEC Egypt",
+      role: "Event web platform · lead front-end · AIESEC Egypt",
       summary:
-        "Public web experience for AIESEC Egypt’s Global Village 2026 cultural-exchange event — landing, event narrative, and registration intake.",
+        "Interactive Vite + React landing for AIESEC Egypt’s Global Village 2026 — hero countdown, agenda, Culture Quest, gallery, and registration into Sheets / Drive.",
       problem:
-        "The national event needed a modern public site that could carry the story and collect registrations for ops — not a one-page brochure.",
+        "The national cultural-exchange event needed a public site that could carry venue, agenda, and gallery storytelling and accept real registrations — not a static brochure that fakes thank-you states.",
       build: [
-        "Shipped the Global Village 26 event site as a React front-end (private AIESEC Egypt repo).",
-        "Structured the public funnel around event storytelling and registration handoff for volunteer / marketing ops.",
+        "Shipped Vite + React + TypeScript + Tailwind v4 with Framer Motion: hero (video / countdown / CTA), about with parallax, scroll agenda, Culture Quest game, gallery lightbox, and Nile University map section.",
+        "Built a multi-step Register flow with client-side image compression and submit to a Google Apps Script backend (Sheets row + Drive uploads + backup email) so confirmation only fires after a real write.",
+        "Configured CI to build and SSH-deploy dist to the event host; credited as developer in the project config.",
       ],
       outcomes: [
-        "Live event funnel for Global Village 2026 under AIESEC Egypt",
-        "Registration path connected to event ops intake",
+        "Public event funnel for Global Village 2026 under AIESEC Egypt",
+        "Registration path wired to Sheets / Drive / email ops intake",
+        "Interactive Culture Quest + gallery beyond a one-page brochure",
       ],
-      stack: ["React", "TypeScript", "Vite"],
+      stack: [
+        "React",
+        "TypeScript",
+        "Vite",
+        "Tailwind CSS v4",
+        "Framer Motion",
+        "Google Apps Script",
+      ],
       links: [
         {
           label: "Repo",
