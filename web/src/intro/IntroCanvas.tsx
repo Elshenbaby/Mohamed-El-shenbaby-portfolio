@@ -31,7 +31,7 @@ const KEYS: { t: number; pos: Vector3; look: Vector3 }[] = [
   { t: 0.0, pos: v(0.95, 1.9, 2.75), look: v(0, 1.05, -0.75) },
   { t: 0.16, pos: v(0.1, 1.52, 1.2), look: v(0, 1.0, -0.72) },
   { t: 0.32, pos: v(0.95, 1.42, 0.6), look: v(-0.05, 1.0, -0.6) },
-  { t: 0.48, pos: v(0.3, 1.33, -0.1), look: SCREEN.clone().add(v(0, -0.01, 0)) },
+  { t: 0.48, pos: v(0.52, 1.5, -0.02), look: SCREEN.clone().add(v(0, -0.01, 0)) },
   { t: 0.66, pos: alongNormal(0.36), look: SCREEN.clone() },
   { t: 0.8, pos: alongNormal(0.2), look: SCREEN.clone() },
   { t: 1.0, pos: alongNormal(0.006), look: SCREEN.clone() },

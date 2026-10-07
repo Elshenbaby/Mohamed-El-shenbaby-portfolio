@@ -46,7 +46,7 @@ function Desk() {
 
 function Chair() {
   return (
-    <group position={[0, 0, 0.12]}>
+    <group position={[0, 0, -0.06]}>
       <RoundedBox args={[0.52, 0.08, 0.5]} radius={0.035} position={[0, 0.43, 0]} castShadow receiveShadow>
         <meshStandardMaterial color="#1c1b24" roughness={0.8} />
       </RoundedBox>

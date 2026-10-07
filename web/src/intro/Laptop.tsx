@@ -5,6 +5,7 @@ import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeom
 import { Color, Matrix4, Object3D, type InstancedMesh, type RectAreaLight } from "three";
 import { ScreenCanvas } from "./ScreenCanvas";
 import { LAPTOP_POS, LID_TILT } from "./layout";
+import { scene } from "./sceneState";
 import { typing } from "./typing";
 
 const DEPTH = 0.22;
@@ -67,7 +68,7 @@ function Keyboard() {
     if (!im) return;
     const t = clock.elapsedTime;
     const p = pressed.current;
-    if (typing.active && t >= next.current) {
+    if (typing.active && !scene.handsBusy && t >= next.current) {
       // the space bar and home row get hit more often, like real typing
       const r = Math.random();
       const i = r < 0.16 ? KEYS.length - 5 : 15 + Math.floor(Math.random() * (KEYS.length - 26));
