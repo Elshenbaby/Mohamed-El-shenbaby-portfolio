@@ -1,209 +1,269 @@
-import { useEffect, useState } from "react";
-import { content, type CaseStudy, type Shot } from "../content";
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
+import { content, type CaseStudy } from "../content";
+import { CaseFile } from "./CaseFile";
 
-function LockIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden fill="none" stroke="currentColor" strokeWidth="2.5">
-      <rect x="4" y="10.5" width="16" height="11" rx="1.5" />
-      <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
-    </svg>
-  );
-}
+const studies = content.caseStudies;
+const N = studies.length;
 
-function Lightbox({ shot, onClose }: { shot: Shot; onClose: () => void }) {
+function useIsWide() {
+  const [wide, setWide] = useState(() => typeof window !== "undefined" && window.innerWidth >= 1024);
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={shot.caption}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[rgba(11,8,22,0.88)] p-4 sm:p-10"
-      onClick={onClose}
-    >
-      <figure className="browser max-h-full max-w-6xl" onClick={(e) => e.stopPropagation()}>
-        <div className="browser__bar">
-          <span className="browser__dot bg-[var(--color-magenta)]" />
-          <span className="browser__dot bg-[var(--color-yellow)]" />
-          <span className="browser__dot bg-[var(--color-cyan)]" />
-          <span className="ml-2 truncate">{shot.caption}</span>
-          <button type="button" onClick={onClose} className="ml-auto px-2 text-base leading-none" aria-label="Close">
-            ✕
-          </button>
-        </div>
-        <img src={shot.src} alt={shot.caption} className="max-h-[80vh] w-full object-contain" />
-      </figure>
-    </div>
-  );
+    const on = () => setWide(window.innerWidth >= 1024);
+    window.addEventListener("resize", on);
+    return () => window.removeEventListener("resize", on);
+  }, []);
+  return wide;
 }
 
-function BehindTheLogin({ study }: { study: CaseStudy }) {
-  const [open, setOpen] = useState<Shot | null>(null);
-  if (!study.insideShots?.length) return null;
+/** Laptop-style frame that tilts toward the pointer and flips through the project's real pages. */
+function Device({ study, active }: { study: CaseStudy; active: boolean }) {
+  const [page, setPage] = useState(0);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const pages = study.pages;
+
+  useEffect(() => {
+    if (!active || pages.length < 2) return;
+    const id = window.setInterval(() => setPage((p) => (p + 1) % pages.length), 3800);
+    return () => window.clearInterval(id);
+  }, [active, pages.length]);
+
+  const onMove = (e: PointerEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    setTilt({ x: ((e.clientY - r.top) / r.height - 0.5) * -8, y: ((e.clientX - r.left) / r.width - 0.5) * 10 });
+  };
+
   return (
-    <div className="mt-16">
-      <div className="reveal flex flex-wrap items-center gap-4">
-        <span className="dimension-tag flex items-center gap-2 !bg-[var(--color-yellow)]">
-          <LockIcon /> Behind the login
-        </span>
-        <p className="max-w-xl text-sm opacity-85">
-          {study.name} sits behind a sign-in, so you would normally never see it. Here's what's inside.
-        </p>
-      </div>
-      <div className="mt-8 grid gap-8 md:grid-cols-2">
-        {study.insideShots.map((shot, i) => (
-          <figure key={shot.src} className={`reveal ${i % 2 ? "md:mt-10 rotate-[0.8deg]" : "-rotate-[0.6deg]"}`}>
-            <button type="button" onClick={() => setOpen(shot)} className="browser block w-full text-left">
-              <div className="browser__bar">
-                <span className="browser__dot bg-[var(--color-magenta)]" />
-                <span className="browser__dot bg-[var(--color-yellow)]" />
-                <span className="browser__dot bg-[var(--color-cyan)]" />
-                <span className="ml-2 truncate">{shot.caption}</span>
-              </div>
-              <img src={shot.src} alt={shot.caption} loading="lazy" className="aspect-[16/10] w-full object-cover object-top" />
-            </button>
-            <figcaption className="caption caption--paper -mt-3 ml-4 text-xs">{shot.caption}</figcaption>
-          </figure>
-        ))}
-      </div>
-      {open && <Lightbox shot={open} onClose={() => setOpen(null)} />}
-    </div>
-  );
-}
-
-function Universe({ study, index, total }: { study: CaseStudy; index: number; total: number }) {
-  const live = study.links?.find((l) => l.label.toLowerCase().includes("live"));
-  return (
-    <section id={`u-${study.id}`} className={`universe u-${study.theme} scroll-mt-16 py-20 sm:py-28`}>
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <div className="reveal flex flex-wrap items-end justify-between gap-5">
-          <div>
-            <p className="universe-label">
-              {study.universe} · {study.tagline}
-            </p>
-            <h3 className="universe-name mt-3">{study.name}</h3>
+    <div className="device-stage" onPointerMove={onMove} onPointerLeave={() => setTilt({ x: 0, y: 0 })}>
+      <div className="device" style={{ transform: `rotateX(${8 + tilt.x}deg) rotateY(${-10 + tilt.y}deg)` }}>
+        <div className="device__screen">
+          <div className="device__bar">
+            <span className="browser__dot bg-[#ff5f57]" />
+            <span className="browser__dot bg-[#febc2e]" />
+            <span className="browser__dot bg-[#28c840]" />
+            <span className="device__url">{new URL(study.links[0].href).host}</span>
+            {study.private && <span className="device__lock">🔒 Sign-in app</span>}
           </div>
-          <p className="dimension-tag">
-            Universe {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-10 lg:grid-cols-12">
-          <figure className="reveal panel halftone-veil -rotate-1 self-start overflow-hidden lg:col-span-7">
-            <img src={study.image} alt={`${study.name} screenshot`} className="aspect-[16/10] w-full object-cover object-top" />
-            {live && (
-              <a
-                href={live.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="caption caption--magenta absolute bottom-3 left-3 z-10 !text-xs"
-              >
-                Live in production ↗
-              </a>
-            )}
-          </figure>
-
-          <div className="flex flex-col gap-8 lg:col-span-5">
-            <div className="reveal panel p-5 pt-7">
-              <p className="caption caption--magenta absolute -top-5 left-4 !py-1 !text-xs">The problem</p>
-              <p className="leading-relaxed">{study.problem}</p>
-            </div>
-            <div className="reveal panel p-5 pt-7">
-              <p className="caption caption--cyan absolute -top-5 left-4 !py-1 !text-xs">The fix</p>
-              <p className="leading-relaxed">{study.blurb}</p>
-            </div>
-            {study.highlights && (
-              <ul className="reveal flex flex-wrap gap-2.5" aria-label="What's inside">
-                {study.highlights.map((h) => (
-                  <li key={h} className="sticker">
-                    {h}
-                  </li>
-                ))}
-              </ul>
-            )}
-            <div className="reveal flex flex-wrap items-center gap-2">
-              <span className="universe-label mr-1 !text-[0.62rem]">Built with</span>
-              {study.stack.map((t) => (
-                <span key={t} className="sticker !bg-[var(--color-ink)] !text-[var(--color-paper)]">
-                  {t}
-                </span>
-              ))}
-            </div>
-            {study.links && (
-              <div className="reveal flex flex-wrap gap-4 pt-2">
-                {study.links.map((l, i) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`bubble ${i === 0 ? "bubble--yellow" : ""}`}
-                  >
-                    {l.label}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {study.photos && study.photos.length > 0 && (
-          <div className={`mt-14 grid gap-4 ${study.photos.length > 3 ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5" : "sm:grid-cols-2"}`}>
-            {study.photos.map((src, i) => (
-              <div
-                key={src}
-                className={`reveal panel halftone-veil overflow-hidden ${i % 2 ? "rotate-1" : "-rotate-1"} ${
-                  study.photos!.length > 3 ? "aspect-square" : "aspect-video"
-                }`}
-              >
-                <img src={src} alt="" loading="lazy" className="h-full w-full object-cover object-top" />
-              </div>
+          <div className="device__view">
+            {pages.map((p, i) => (
+              <img
+                key={p.src}
+                src={p.src}
+                alt={`${study.name}: ${p.caption}`}
+                loading="lazy"
+                className={`device__img ${i === page ? "is-on" : ""}`}
+              />
             ))}
+            <div className="device__glare" />
           </div>
-        )}
-
-        <BehindTheLogin study={study} />
+        </div>
+        <div className="device__base" />
       </div>
-    </section>
+      {pages.length > 1 && (
+        <div className="device__tabs" role="tablist" aria-label={`${study.name} pages`}>
+          {pages.map((p, i) => (
+            <button
+              key={p.src}
+              type="button"
+              role="tab"
+              aria-selected={i === page}
+              onClick={() => setPage(i)}
+              className={`device__tab ${i === page ? "is-on" : ""}`}
+            >
+              <span>{String(i + 1).padStart(2, "0")}</span> {p.caption}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Universe({
+  study,
+  index,
+  active,
+  shift,
+  onOpen,
+}: {
+  study: CaseStudy;
+  index: number;
+  active: boolean;
+  shift: number;
+  onOpen: () => void;
+}) {
+  const live = study.links[0];
+  const vars = {
+    "--u-bg": study.palette.bg,
+    "--u-surface": study.palette.surface,
+    "--u-accent": study.palette.accent,
+    "--u-accent2": study.palette.accent2,
+    "--u-text": study.palette.text,
+  } as CSSProperties;
+
+  return (
+    <article id={`u-${study.id}`} className="universe" style={vars} aria-label={`${study.name}, universe ${index + 1}`}>
+      <div className="universe__ghost" style={{ transform: `translateX(${shift * 18}vw)` }} aria-hidden>
+        {study.name}
+      </div>
+      <div className="universe__rift" aria-hidden />
+
+      <div className="universe__inner">
+        <div className="universe__copy" style={{ transform: `translateX(${shift * -6}vw)` }}>
+          <p className="universe__meta">
+            <span>{study.universe}</span>
+            <span>{study.year}</span>
+            <span>{study.role}</span>
+          </p>
+          <h3 className="universe__name">{study.name}</h3>
+          <p className="universe__tagline">{study.tagline}</p>
+
+          <div className="universe__story">
+            <div>
+              <p className="universe__label">The problem</p>
+              <p>{study.problem}</p>
+            </div>
+            <div>
+              <p className="universe__label universe__label--fix">The fix</p>
+              <p>{study.blurb}</p>
+            </div>
+          </div>
+
+          <ul className="universe__chips" aria-label="What's inside">
+            {study.highlights.slice(0, 5).map((h) => (
+              <li key={h}>{h}</li>
+            ))}
+          </ul>
+
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <button type="button" onClick={onOpen} className="universe__cta">
+              Open case file <span aria-hidden>→</span>
+            </button>
+            <a href={live.href} target="_blank" rel="noopener noreferrer" className="universe__link">
+              {live.label} ↗
+            </a>
+          </div>
+        </div>
+
+        <div className="universe__device" style={{ transform: `translateX(${shift * 10}vw)` }}>
+          <Device study={study} active={active} />
+        </div>
+      </div>
+    </article>
   );
 }
 
 export function Multiverse() {
-  const studies = [...content.caseStudies].sort((a, b) => Number(!!b.featured) - Number(!!a.featured));
+  const wide = useIsWide();
+  const rail = useRef<HTMLDivElement>(null);
+  const track = useRef<HTMLDivElement>(null);
+  const glitch = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState(0);
+  const [open, setOpen] = useState<CaseStudy | null>(null);
+
+  useEffect(() => {
+    if (!wide) return;
+    let raf = 0;
+    let shown = 0;
+    const tick = () => {
+      const el = rail.current;
+      if (el) {
+        const r = el.getBoundingClientRect();
+        const span = r.height - window.innerHeight;
+        const target = Math.min(1, Math.max(0, -r.top / span)) * (N - 1);
+        shown += (target - shown) * 0.12;
+        if (Math.abs(target - shown) < 0.0005) shown = target;
+        if (track.current) track.current.style.transform = `translate3d(${-shown * 100}vw,0,0)`;
+        // tear the picture between worlds
+        const frac = shown - Math.floor(shown);
+        const tear = frac > 0.02 && frac < 0.98 ? Math.sin(frac * Math.PI) : 0;
+        if (glitch.current) glitch.current.style.setProperty("--tear", tear.toFixed(3));
+        setPos((p) => (Math.abs(p - shown) > 0.004 ? shown : p));
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [wide]);
+
+  const current = Math.round(pos);
+
+  const jump = (i: number) => {
+    const el = rail.current;
+    if (!el || !wide) {
+      document.getElementById(`u-${studies[i].id}`)?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    const span = el.offsetHeight - window.innerHeight;
+    window.scrollTo({ top: el.offsetTop + (span * i) / (N - 1), behavior: "smooth" });
+  };
+
   return (
     <div id="work">
-      <section className="relative overflow-hidden bg-[var(--color-night)] py-20 text-[var(--color-paper)] sm:py-28">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <p className="reveal dimension-tag">Selected work</p>
-          <h2 className="reveal section-title mt-5">The Multiverse</h2>
-          <p className="reveal mt-6 max-w-2xl text-lg leading-relaxed text-[#cfc6ee]">
-            Every project I've built lives in its own universe, drawn in its own style. Different problem, different
-            world. Same guy shipping it.
+      <section className="multiverse-head">
+        <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
+          <p className="reveal dimension-tag">Selected work · {N} universes</p>
+          <h2 className="reveal section-title mt-6">
+            The <em>Multiverse</em>
+          </h2>
+          <p className="reveal mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-muted)]">
+            Every product I've built lives in its own universe, painted in that product's own colours. Different
+            problem, different world. Same guy shipping it to production.
           </p>
-          <div className="reveal mt-10 flex flex-wrap gap-3">
-            {studies.map((s) => (
-              <a key={s.id} href={`#u-${s.id}`} className={`portal-chip portal-chip--${s.theme}`}>
-                <span className="block text-[0.6rem] tracking-[0.25em] opacity-80" style={{ fontFamily: "var(--font-mono)" }}>
-                  {s.universe}
-                </span>
-                {s.name}
-              </a>
+          <div className="reveal mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {studies.map((s, i) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => jump(i)}
+                className="portal-chip"
+                style={{ "--u-accent": s.palette.accent } as CSSProperties}
+              >
+                <span className="portal-chip__n">{String(i + 1).padStart(2, "0")}</span>
+                <span className="portal-chip__name">{s.name}</span>
+                <span className="portal-chip__tag">{s.tagline}</span>
+              </button>
             ))}
           </div>
+          {wide && <p className="reveal scroll-hint mt-14">Scroll to travel sideways</p>}
         </div>
       </section>
-      {studies.map((s, i) => (
-        <Universe key={s.id} study={s} index={i} total={studies.length} />
-      ))}
+
+      {wide ? (
+        <div ref={rail} className="relative" style={{ height: `${N * 100}vh` }}>
+          <div className="sticky top-0 h-screen overflow-hidden">
+            <div ref={track} className="flex h-full will-change-transform" style={{ width: `${N * 100}vw` }}>
+              {studies.map((s, i) => (
+                <Universe
+                  key={s.id}
+                  study={s}
+                  index={i}
+                  active={current === i}
+                  shift={Math.max(-1, Math.min(1, i - pos))}
+                  onOpen={() => setOpen(s)}
+                />
+              ))}
+            </div>
+            <div ref={glitch} className="tear" aria-hidden />
+            <div className="universe-hud" aria-hidden>
+              <span>
+                Universe {String(current + 1).padStart(2, "0")} / {String(N).padStart(2, "0")}
+              </span>
+              <span className="universe-hud__bar">
+                <span style={{ width: `${(pos / (N - 1)) * 100}%` }} />
+              </span>
+              <span>{studies[current].name}</span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div>
+          {studies.map((s, i) => (
+            <Universe key={s.id} study={s} index={i} active shift={0} onOpen={() => setOpen(s)} />
+          ))}
+        </div>
+      )}
+
+      {open && <CaseFile study={open} onClose={() => setOpen(null)} />}
     </div>
   );
 }

@@ -39,49 +39,64 @@ type Beat = { from: number; to: number; node: ReactNode; className: string };
 const BEATS: Beat[] = [
   {
     from: 0.13,
-    to: 0.3,
-    className: "left-[6%] top-[16%]",
+    to: 0.29,
+    className: "left-[6%] top-[15%]",
     node: (
       <>
-        <p className="caption">Alright. Let's start from the top.</p>
-        <p className="caption caption--late mt-3 ml-8">My name is Mohamed El-Shenbaby.</p>
+        <p className="caption caption--cyan">Cairo. 2:14 AM. Raining.</p>
+        <p className="caption caption--late mt-3 ml-8">
+          Somewhere out there, a whole team is still running their company on <b>spreadsheets</b>.
+        </p>
       </>
     ),
   },
   {
     from: 0.31,
-    to: 0.47,
-    className: "right-[6%] top-[14%] items-end text-right",
+    to: 0.46,
+    className: "right-[6%] top-[15%] items-end text-right",
     node: (
       <>
-        <p className="caption caption--cyan">Cairo. 2:14 AM.</p>
-        <p className="caption caption--late mt-3 mr-6">
-          Somewhere out there, a whole company is still running on spreadsheets.
+        <p className="caption">
+          My name is <b>Mohamed El-Shenbaby</b>.
         </p>
+        <p className="caption caption--late mt-3 mr-6">I build the systems that replace them.</p>
       </>
     ),
   },
   {
     from: 0.48,
-    to: 0.63,
-    className: "left-[6%] bottom-[14%]",
+    to: 0.6,
+    className: "left-[6%] bottom-[13%]",
     node: (
       <>
-        <p className="caption">That's where I come in.</p>
-        <p className="caption caption--late mt-3 ml-6">
-          I build custom CRMs, dashboards and automations. Then I ship them. To production.
+        <p className="caption">Custom CRMs. Live dashboards. Automations.</p>
+        <p className="caption caption--late caption--magenta mt-3 ml-6">
+          Then I ship them. <b>To production.</b>
         </p>
       </>
     ),
   },
   {
-    from: 0.66,
-    to: 0.88,
-    className: "inset-x-0 top-[12%] items-center text-center",
+    from: 0.62,
+    to: 0.76,
+    className: "right-[6%] bottom-[13%] items-end text-right",
+    node: (
+      <>
+        <p className="caption caption--cyan">This one is live right now.</p>
+        <p className="caption caption--late mt-3 mr-6">
+          <b>Rouh</b>, the CRM a national team of 18 branches runs on.
+        </p>
+      </>
+    ),
+  },
+  {
+    from: 0.8,
+    to: 0.93,
+    className: "inset-x-0 top-[10%] items-center text-center",
     node: (
       <>
         <p className="sfx">ZWOOP!</p>
-        <p className="caption caption--magenta mt-4">Wanna see how I work? Come inside.</p>
+        <p className="caption caption--magenta mt-6">Wanna see how I work? Come inside.</p>
       </>
     ),
   },
@@ -113,7 +128,7 @@ export function IntroScene() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  const flash = smooth(0.945, 0.995, p);
+  const flash = smooth(0.95, 0.995, p);
 
   const fallback = (
     <div className="flex h-full items-center justify-center bg-[var(--color-night)]">
@@ -135,14 +150,20 @@ export function IntroScene() {
         {/* title card */}
         <div
           className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-5 text-center"
-          style={{ opacity: 1 - smooth(0.06, 0.13, p), transform: `scale(${1 + smooth(0, 0.13, p) * 0.15})` }}
+          style={{
+            opacity: 1 - smooth(0.05, 0.12, p),
+            transform: `scale(${1 + smooth(0, 0.12, p) * 0.2})`,
+            filter: `blur(${smooth(0.04, 0.12, p) * 10}px)`,
+          }}
         >
           <p className="dimension-tag">Earth-20 · Cairo, Egypt</p>
           <h1 className="comic-logo mt-4">
             <span>Mohamed</span>
             <span>El-Shenbaby</span>
           </h1>
-          <p className="caption mt-6">Software engineer · Custom CRMs · Django · Production</p>
+          <p className="mt-8 text-xs font-bold uppercase tracking-[0.35em] text-[var(--color-muted)]" style={{ fontFamily: "var(--font-mono)" }}>
+            Software engineer · Custom CRMs · Shipped to production
+          </p>
         </div>
 
         {BEATS.map((beat, i) => {
@@ -173,7 +194,7 @@ export function IntroScene() {
           Skip intro
         </a>
 
-        <div className="pointer-events-none absolute inset-0 bg-[var(--color-paper)]" style={{ opacity: flash }} />
+        <div className="pointer-events-none absolute inset-0 bg-[var(--color-night)]" style={{ opacity: flash }} />
       </div>
     </section>
   );

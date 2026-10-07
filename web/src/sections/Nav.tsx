@@ -37,8 +37,8 @@ export function Nav() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-8">
         <a href="#top" className="text-2xl tracking-wide" style={{ fontFamily: "var(--font-comic)" }}>
           <span className="text-[var(--color-yellow)]">M</span>
-          <span className="text-[var(--color-cyan)]">.</span>
-          <span className="text-[var(--color-paper)]">Shenbaby</span>
+          <span className="text-[var(--color-magenta)]">.</span>
+          <span className="text-white">Shenbaby</span>
         </a>
         <nav className="hidden items-center gap-6 md:flex">
           {items.map((i) => (

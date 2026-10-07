@@ -232,13 +232,13 @@ export function MazeQuest() {
   );
 
   return (
-    <section id="play" className="border-t border-line bg-ink py-20 sm:py-28">
+    <section id="play" className="paper py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <p className="section-label reveal">Arcade</p>
-        <h2 className="reveal mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
-          Find the builder
+        <p className="dimension-tag reveal">Bonus level · arcade</p>
+        <h2 className="reveal section-title mt-6">
+          Find the <em>builder</em>
         </h2>
-        <p className="reveal mt-3 max-w-2xl text-mist">
+        <p className="reveal mt-6 max-w-2xl text-lg text-mist">
           Insert your name. Clear the maze. Reach Mohamed. Winner gets a real build conversation.
         </p>
 

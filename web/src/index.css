@@ -1,19 +1,20 @@
 @import "tailwindcss";
 @import "./comic.css";
+@import "./multiverse.css";
 
 @theme {
   --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
   --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --color-ink: #071014;
-  --color-ink-2: #0c1a1f;
-  --color-panel: #10242b;
-  --color-line: #1e3a42;
-  --color-mist: #9bb4bc;
-  --color-foam: #e8f4f2;
-  --color-teal: #2ec4b6;
-  --color-teal-dim: #1a8f85;
-  --color-amber: #e8a838;
-  --color-amber-dim: #b8791f;
+  --color-ink: #05040a;
+  --color-ink-2: #0d0b16;
+  --color-panel: #14111f;
+  --color-line: #241f36;
+  --color-mist: #9a94b3;
+  --color-foam: #ece8f7;
+  --color-teal: #05d9e8;
+  --color-teal-dim: #0398a3;
+  --color-amber: #ffd23f;
+  --color-amber-dim: #c99a00;
 }
 
 html {
@@ -31,13 +32,15 @@ body {
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--color-teal) 45%, transparent);
-  color: var(--color-ink);
+  background: #ff2a6d;
+  color: #fff;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 .font-display {

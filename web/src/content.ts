@@ -9,29 +9,38 @@ export type Service = {
   blurb: string;
 };
 
-export type UniverseTheme = "noir" | "pop" | "neon" | "pixel" | "punk";
-
 export type Shot = {
   src: string;
   caption: string;
 };
 
+/** Each universe is painted in that project's own brand colours. */
+export type Palette = {
+  bg: string;
+  surface: string;
+  accent: string;
+  accent2: string;
+  text: string;
+};
+
 export type CaseStudy = {
   id: string;
   universe: string;
-  theme: UniverseTheme;
   name: string;
   tagline: string;
+  year: string;
+  role: string;
+  palette: Palette;
   problem: string;
   blurb: string;
-  image: string;
+  /** Real screens from the live product, shown as a browsable preview. */
+  pages: Shot[];
   photos?: string[];
-  highlights?: string[];
+  highlights: string[];
   stack: string[];
-  featured?: boolean;
-  links?: Link[];
-  /** Screens that normally sit behind a sign-in, so visitors can see inside. */
-  insideShots?: Shot[];
+  links: Link[];
+  /** True when most of the product sits behind a sign-in. */
+  private?: boolean;
 };
 
 export type MaintainedProject = {
@@ -64,6 +73,8 @@ export type SkillGroup = {
   title: string;
   items: string[];
 };
+
+const B = import.meta.env.BASE_URL;
 
 export const content = {
   name: "Mohamed El-Shenbaby",
@@ -191,85 +202,145 @@ export const content = {
   ] satisfies SkillGroup[],
   caseStudies: [
     {
+      id: "rouh",
+      universe: "Earth-26",
+      name: "Rouh",
+      tagline: "The CRM a national team runs on",
+      year: "2026",
+      role: "Designed & built",
+      palette: { bg: "#0b0706", surface: "#1a0f0b", accent: "#e8502e", accent2: "#ffd2c2", text: "#f6ece8" },
+      problem:
+        "Members across 18 branches tracked sign-ups and applications in scattered sheets. Work got lost between people, nobody could see their own targets, and the monthly competition between branches was tallied by hand.",
+      blurb:
+        "A Django CRM where every member opens straight onto their own queue. Data syncs live from the organisation's global platform, every role gets its own view, and a public leaderboard ranks every branch in real time.",
+      pages: [
+        { src: `${B}projects/rouh/hero.jpg`, caption: "Landing · one home for every team" },
+        { src: `${B}projects/rouh/does.jpg`, caption: "Queue, live sync & KPIs vs plan" },
+        { src: `${B}projects/rouh/roles.jpg`, caption: "Role-based views: member to president" },
+        { src: `${B}projects/rouh/icomm.jpg`, caption: "Live public leaderboard" },
+      ],
+      highlights: [
+        "Personal work queue",
+        "Live sync from the global platform",
+        "KPIs vs plan",
+        "Views per role",
+        "Branch-level data isolation",
+        "Full change log",
+        "Public live leaderboard",
+      ],
+      stack: ["Django", "Gunicorn", "REST sync", "Role-based access"],
+      links: [
+        { label: "Live site", href: "https://rouh.aiesec.org.eg/" },
+        { label: "Live leaderboard", href: "https://rouh.aiesec.org.eg/icomm/" },
+      ],
+      private: true,
+    },
+    {
+      id: "opsdream",
+      universe: "Earth-500",
+      name: "Dream Day",
+      tagline: "A national ops day, gamified",
+      year: "2026",
+      role: "Designed & built",
+      palette: { bg: "#0a0303", surface: "#1c0607", accent: "#e3262f", accent2: "#ffb3b6", text: "#fbeeee" },
+      problem:
+        "An operations day for 18 branches needed hype, a clear points system and live standings on the venue screens. Usually that means a slide deck, a PDF and a spreadsheet nobody refreshes.",
+      blurb:
+        "One event site with a live countdown, a playable 3D buzzer that pushes approvals down the pipeline, the agenda, the points system, and a big-screen dashboard fed live from the CRM.",
+      pages: [
+        { src: `${B}projects/opsdream/hero.jpg`, caption: "Hero · animated marble & countdown" },
+        { src: `${B}projects/opsdream/push.jpg`, caption: "Playable 3D buzzer game" },
+        { src: `${B}projects/opsdream/agenda.jpg`, caption: "Agenda of the day" },
+        { src: `${B}projects/opsdream/points.jpg`, caption: "Campaign points system" },
+        { src: `${B}projects/opsdream/dashboard.jpg`, caption: "Live big-screen dashboard" },
+      ],
+      highlights: ["Live countdown", "3D buzzer mini-game", "Points system", "Live leaderboard", "Venue dashboard"],
+      stack: ["Three.js", "WebGL shaders", "Vanilla JS", "Live CRM data"],
+      links: [
+        { label: "Live site", href: "https://opsdream.aiesec.org.eg/" },
+        { label: "Live dashboard", href: "https://opsdream.aiesec.org.eg/dashboard.html" },
+      ],
+    },
+    {
       id: "soluo",
       universe: "Earth-001",
-      theme: "noir",
       name: "Soluo",
       tagline: "Custom CRM platform",
+      year: "2025",
+      role: "Rebuilt & shipped",
+      palette: { bg: "#03080f", surface: "#0a1626", accent: "#2f8cff", accent2: "#9cd0ff", text: "#eaf3ff" },
       problem:
         "Every branch ran its accounts, deals, and members in an off-the-shelf tool that didn't fit how they worked. No shared flow between branches, no single source of truth, and every report meant someone pulling numbers together by hand.",
       blurb:
         "Rebuilt a legacy CRM into a full Django system for companies, deals, membership, and live sync. Now running in production.",
-      image: `${import.meta.env.BASE_URL}projects/soluo.png`,
-      highlights: [
-        "Company & deal pipeline",
-        "Membership records",
-        "Approval workflows",
-        "Live data sync",
-      ],
+      pages: [{ src: `${B}projects/soluo.png`, caption: "Landing · accounts, deals & membership" }],
+      highlights: ["Company & deal pipeline", "Membership records", "Approval workflows", "Live data sync"],
       stack: ["Django", "PostgreSQL", "Docker"],
-      featured: true,
       links: [{ label: "Live site", href: "https://soluo.aiesec.org.eg" }],
-    },
-    {
-      id: "global-village-26",
-      universe: "Earth-026",
-      theme: "pop",
-      name: "Global Village 26",
-      tagline: "Event website & registration",
-      problem:
-        "Event info and sign-ups were spread across social posts and a plain form, with no central site and no clean way to get registrations into the sheets the ops team already ran on.",
-      blurb:
-        "Live event site with agenda, gallery, Culture Quest, and ticket registration wired to Google Sheets and Drive.",
-      image: `${import.meta.env.BASE_URL}projects/global-village-live.png`,
-      highlights: ["Agenda", "Photo gallery", "Culture Quest", "Ticket registration"],
-      photos: [
-        `${import.meta.env.BASE_URL}projects/gv/gallery-1.jpg`,
-        `${import.meta.env.BASE_URL}projects/gv/gallery-3.jpg`,
-        `${import.meta.env.BASE_URL}projects/gv/about-1.webp`,
-        `${import.meta.env.BASE_URL}projects/gv/about-2.webp`,
-        `${import.meta.env.BASE_URL}projects/gv/about-3.webp`,
-      ],
-      stack: ["React", "TypeScript", "Vite"],
-      links: [
-        { label: "Live site", href: "https://globalvillage.aiesec.org.eg/" },
-        {
-          label: "Repo",
-          href: "https://github.com/AIESEC-Egypt/Global-village-26",
-        },
-      ],
+      private: true,
     },
     {
       id: "iris",
       universe: "Earth-404",
-      theme: "neon",
       name: "IRIS",
       tagline: "Analytics dashboard",
+      year: "2025",
+      role: "Designed & built",
+      palette: { bg: "#08051a", surface: "#130d33", accent: "#7b5cff", accent2: "#ff7ac8", text: "#f1edff" },
       problem:
         "Tracking performance across countries, regions, and local teams meant rebuilding the same spreadsheets and slide decks every week, so leadership only ever saw outdated snapshots.",
       blurb:
         "Performance dashboard so leadership can see pipeline health in one place. Auto-refreshed, not hand-built sheets.",
-      image: `${import.meta.env.BASE_URL}projects/iris.png`,
+      pages: [{ src: `${B}projects/iris.png`, caption: "Landing · analytics & performance tracking" }],
       highlights: ["Rankings by branch", "Branch deep dives", "Term comparisons", "Achiever tracking"],
       stack: ["Django", "PostgreSQL", "Redis"],
       links: [{ label: "Live site", href: "https://iris.aiesec.org.eg/" }],
     },
     {
+      id: "global-village-26",
+      universe: "Earth-026",
+      name: "Global Village",
+      tagline: "Event website & registration",
+      year: "2026",
+      role: "Designed & built",
+      palette: { bg: "#0d0618", surface: "#1d0f33", accent: "#ff7a1a", accent2: "#c9a6ff", text: "#fbf3ff" },
+      problem:
+        "Event info and sign-ups were spread across social posts and a plain form, with no central site and no clean way to get registrations into the sheets the ops team already ran on.",
+      blurb:
+        "Live event site with agenda, gallery, Culture Quest, and ticket registration wired to Google Sheets and Drive.",
+      pages: [{ src: `${B}projects/global-village-live.png`, caption: "Landing · event, tickets & agenda" }],
+      photos: [
+        `${B}projects/gv/gallery-1.jpg`,
+        `${B}projects/gv/gallery-3.jpg`,
+        `${B}projects/gv/about-1.webp`,
+        `${B}projects/gv/about-2.webp`,
+        `${B}projects/gv/about-3.webp`,
+      ],
+      highlights: ["Agenda", "Photo gallery", "Culture Quest", "Ticket registration"],
+      stack: ["React", "TypeScript", "Vite"],
+      links: [
+        { label: "Live site", href: "https://globalvillage.aiesec.org.eg/" },
+        { label: "Repo", href: "https://github.com/AIESEC-Egypt/Global-village-26" },
+      ],
+    },
+    {
       id: "omar-web",
       universe: "Earth-8BIT",
-      theme: "pixel",
       name: "Omar's Journey",
       tagline: "Interactive portfolio site",
+      year: "2026",
+      role: "Client build",
+      palette: { bg: "#05061a", surface: "#10123a", accent: "#ffd23f", accent2: "#7cf29a", text: "#e9f0ff" },
       problem:
         "A final internship report is usually a slide deck nobody remembers past the presentation. The client wanted his Boehringer Ingelheim internship to actually stick with whoever reviewed it.",
       blurb:
         "Arcade-styled portfolio for a client internship story: playable levels, mini-games, and a photo finale instead of a slide deck.",
-      highlights: ["Start screen", "Office level", "Site visits", "Pharmacy floor", "Photo finale"],
-      image: `${import.meta.env.BASE_URL}projects/omar-web.png`,
-      photos: [
-        `${import.meta.env.BASE_URL}projects/omar/level-map.png`,
-        `${import.meta.env.BASE_URL}projects/omar/level-finale.png`,
+      pages: [
+        { src: `${B}projects/omar-web.png`, caption: "Press start" },
+        { src: `${B}projects/omar/level-map.png`, caption: "Level select map" },
+        { src: `${B}projects/omar/level-finale.png`, caption: "Photo finale" },
       ],
+      highlights: ["Start screen", "Office level", "Site visits", "Pharmacy floor", "Photo finale"],
       stack: ["React", "TypeScript", "Vite"],
       links: [
         { label: "Live site", href: "https://elshenbaby.github.io/Omar-Web/" },

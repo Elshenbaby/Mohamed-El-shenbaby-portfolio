@@ -6,6 +6,7 @@ import { content } from "./content";
 import { IntroScene } from "./intro/IntroScene";
 import { MazeQuest } from "./MazeQuest";
 import { About } from "./sections/About";
+import { Boot } from "./sections/Boot";
 import { Contact } from "./sections/Contact";
 import { Multiverse } from "./sections/Multiverse";
 import { Nav } from "./sections/Nav";
@@ -24,11 +25,10 @@ export function App() {
       gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) => {
         gsap.from(el, {
           opacity: 0,
-          y: 40,
-          scale: 0.94,
-          duration: 0.5,
-          // stepped easing so panels land like drawn frames, not tweens
-          ease: "steps(4)",
+          y: 48,
+          filter: "blur(8px)",
+          duration: 0.9,
+          ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
         });
       });
@@ -41,8 +41,9 @@ export function App() {
       <Nav />
       <main>
         <IntroScene />
+        <Boot />
         <About />
-        <DimensionShift text="Entering the multiverse · every project is its own universe" />
+        <DimensionShift text="Entering the multiverse · every product is its own universe" />
         <Multiverse />
         <DimensionShift text="Variants detected · more universes ahead" />
         <Variants />
@@ -52,7 +53,7 @@ export function App() {
         <Contact />
       </main>
       <footer
-        className="bg-[var(--color-ink)] py-8 text-center text-xs tracking-[0.25em] text-[#a79fc8]"
+        className="border-t border-[var(--color-line)] bg-[var(--color-night)] py-8 text-center text-[0.65rem] tracking-[0.25em] text-[var(--color-muted)]"
         style={{ fontFamily: "var(--font-mono)" }}
       >
         © {new Date().getFullYear()} {content.name.toUpperCase()} · DRAWN & CODED IN CAIRO
