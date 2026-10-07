@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useRef, type MutableRefObject, type RefObject } from "react";
+import { useMemo, useRef, type MutableRefObject, type RefObject } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Outlines, RoundedBox } from "@react-three/drei";
 import { MathUtils, Quaternion, Vector2, Vector3, type Group, type Mesh } from "three";
 import { LAPTOP_POS } from "./layout";
 import { scene } from "./sceneState";
-import { makeHairBump } from "./textures";
+import { toon } from "./toonMaterial";
 import { typing } from "./typing";
 
 /** The whole figure sits this far forward so the elbows bend naturally at the desk. */
@@ -15,19 +15,23 @@ const INK = "#07050d";
 const HOODIE = "#b0122c";
 const HOODIE_SHADE = "#7e0a1e";
 const SKIN = "#c08560";
-const HAIR = "#211510";
+const HAIR = "#2a1a12";
 
-function Ink({ px = 2.2 }: { px?: number }) {
-  return <Outlines thickness={px} color={INK} />;
+/** Ink line weight; Spider-Verse characters carry a heavier line than the world around them. */
+function Ink({ px = 3 }: { px?: number }) {
+  return <Outlines thickness={px * 1.25} color={INK} />;
+}
+function Toon({ c, rim }: { c: string; rim?: number }) {
+  return <primitive object={toon(c, { rim })} attach="material" dispose={null} />;
 }
 function Hoodie({ color = HOODIE }: { color?: string }) {
-  return <meshPhysicalMaterial color={color} roughness={0.88} sheen={0.6} sheenColor="#ff5a78" sheenRoughness={0.7} />;
+  return <Toon c={color} />;
 }
 function Skin() {
-  return <meshPhysicalMaterial color={SKIN} roughness={0.5} sheen={0.5} sheenColor="#ffb08a" />;
+  return <Toon c={SKIN} />;
 }
 function Hair() {
-  return <meshPhysicalMaterial color={HAIR} roughness={0.55} sheen={0.7} sheenColor="#7a5444" />;
+  return <Toon c={HAIR} rim={0.7} />;
 }
 
 function smooth(a: number, b: number, x: number) {
@@ -165,8 +169,14 @@ function Arm({
   // keyboard home row, in this body's local space
   const kb = useMemo(() => new Vector3(LAPTOP_POS[0], LAPTOP_POS[1] + 0.03, LAPTOP_POS[2] - 0.018 - BODY_Z), []);
 
-  useFrame(({ clock }, dt) => {
-    const t = clock.elapsedTime;
+  const held = useRef({ step: -1, t: 0 });
+
+  useFrame(({ clock }) => {
+    const step = Math.floor(clock.elapsedTime * 12);
+    if (step === held.current.step) return;
+    const dt = Math.min(0.1, clock.elapsedTime - held.current.t);
+    held.current = { step, t: clock.elapsedTime };
+    const t = step / 12;
     const p = progress.current;
     const browsing = p > 0.58 && p < 0.76;
     const stretch = stretchWeight(t);
@@ -248,15 +258,30 @@ function Arm({
         <Ink />
       </mesh>
       <group ref={hand}>
-        <Hand side={side} fingers={fingers} />
+        <group scale={1.18}>
+          <Hand side={side} fingers={fingers} />
+        </group>
       </group>
     </group>
   );
 }
 
+/** Curl clumps on the crown and back of the head: [x, y, z, radius, tiltX, tiltZ]. */
+const CLUMPS: [number, number, number, number, number, number][] = [
+  [0, 0.098, -0.035, 0.04, -0.3, 0],
+  [-0.04, 0.094, -0.01, 0.036, -0.1, 0.4],
+  [0.04, 0.094, -0.01, 0.036, -0.1, -0.4],
+  [0, 0.1, 0.02, 0.04, 0.2, 0],
+  [-0.05, 0.08, 0.035, 0.034, 0.5, 0.5],
+  [0.05, 0.08, 0.035, 0.034, 0.5, -0.5],
+  [0, 0.08, 0.062, 0.036, 0.8, 0],
+  [-0.072, 0.06, -0.008, 0.03, 0, 0.9],
+  [0.072, 0.06, -0.008, 0.03, 0, -0.9],
+  [-0.032, 0.058, 0.078, 0.03, 1.0, 0.3],
+  [0.032, 0.058, 0.078, 0.03, 1.0, -0.3],
+];
+
 function Head() {
-  const hairBump = useMemo(() => makeHairBump(), []);
-  useEffect(() => () => hairBump.dispose(), [hairBump]);
   return (
     <group>
       {/* skull, jaw and short beard */}
@@ -289,7 +314,7 @@ function Head() {
         <group key={s} position={[s * 0.036, 0.016, -0.091]}>
           <mesh scale={[1, 0.75, 0.5]}>
             <sphereGeometry args={[0.012, 12, 10]} />
-            <meshStandardMaterial color="#120c0a" roughness={0.2} />
+            <Toon c="#120c0a" />
           </mesh>
           <mesh position={[s * -0.003, 0.004, -0.004]}>
             <sphereGeometry args={[0.0028, 8, 6]} />
@@ -310,27 +335,36 @@ function Head() {
         </mesh>
       ))}
 
-      {/* hair: a close cap down to the nape with a curly bump texture, and volume on top */}
+      {/* hair: a smooth cap plus a few bold curl clumps, drawn the way the film stylises hair */}
       <mesh position={[0, 0.006, 0.012]} rotation={[0.62, 0, 0]} scale={[1.02, 1.05, 1.07]} castShadow>
-        <sphereGeometry args={[0.104, 48, 32, 0, Math.PI * 2, 0, Math.PI * 0.6]} />
-        <meshStandardMaterial color={HAIR} roughness={0.82} bumpMap={hairBump} bumpScale={2.2} />
+        <sphereGeometry args={[0.104, 40, 28, 0, Math.PI * 2, 0, Math.PI * 0.6]} />
+        <Toon c={HAIR} rim={0.35} />
         <Ink />
       </mesh>
-      <mesh position={[0, 0.072, 0.004]} scale={[0.9, 0.42, 0.98]} castShadow>
-        <sphereGeometry args={[0.1, 40, 24]} />
-        <meshStandardMaterial color={HAIR} roughness={0.82} bumpMap={hairBump} bumpScale={2.2} />
-      </mesh>
+      {CLUMPS.map(([x, y, z, r, rx, rz], i) => (
+        <mesh
+          key={i}
+          position={[x * 1.16, 0.006 + (y - 0.006) * 1.16, 0.012 + (z - 0.012) * 1.16]}
+          rotation={[rx, 0, rz]}
+          scale={[1.05, 0.7, 1.05]}
+          castShadow
+        >
+          <sphereGeometry args={[r, 16, 10]} />
+          <Toon c={i % 2 === 0 ? "#3b261b" : HAIR} rim={0.75} />
+          <Ink px={1.8} />
+        </mesh>
+      ))}
       {/* over-ear headphones */}
       <mesh position={[0, 0.006, 0.006]}>
         <torusGeometry args={[0.122, 0.012, 10, 48, Math.PI]} />
-        <meshStandardMaterial color="#111116" roughness={0.4} metalness={0.3} />
+        <Toon c="#111116" />
         <Ink px={1.6} />
       </mesh>
       {[-1, 1].map((s) => (
         <group key={s} position={[s * 0.116, -0.008, 0.006]} rotation={[0, 0, Math.PI / 2]}>
           <mesh castShadow>
             <cylinderGeometry args={[0.046, 0.046, 0.032, 28]} />
-            <meshStandardMaterial color="#141418" roughness={0.45} metalness={0.25} />
+            <Toon c="#141418" />
             <Ink px={1.8} />
           </mesh>
           <mesh position={[0, -s * 0.0168, 0]} rotation={[Math.PI / 2, 0, 0]}>
@@ -349,8 +383,14 @@ export function Character({ progress }: { progress: MutableRefObject<number> }) 
   const look = useRef(0);
   const profile = useTorsoProfile();
 
-  useFrame(({ clock }, dt) => {
-    const t = clock.elapsedTime;
+  const held = useRef({ step: -1, t: 0 });
+
+  useFrame(({ clock }) => {
+    const step = Math.floor(clock.elapsedTime * 12);
+    if (step === held.current.step) return;
+    const dt = Math.min(0.1, clock.elapsedTime - held.current.t);
+    held.current = { step, t: clock.elapsedTime };
+    const t = step / 12;
     const stretch = stretchWeight(t);
     scene.handsBusy = stretch > 0.05;
     if (torso.current) {
@@ -385,18 +425,18 @@ export function Character({ progress }: { progress: MutableRefObject<number> }) 
         <group key={s}>
           <mesh position={[s * 0.1, 0.5, -0.14]} rotation={[Math.PI / 2 - 0.05, 0, 0]} castShadow>
             <capsuleGeometry args={[0.07, 0.3, 6, 14]} />
-            <meshStandardMaterial color="#15141d" roughness={0.85} />
+            <Toon c="#15141d" />
           </mesh>
           <mesh position={[s * 0.11, 0.27, -0.33]} rotation={[0.08, 0, 0]} castShadow>
             <capsuleGeometry args={[0.056, 0.36, 6, 14]} />
-            <meshStandardMaterial color="#15141d" roughness={0.85} />
+            <Toon c="#15141d" />
           </mesh>
           <RoundedBox args={[0.1, 0.06, 0.24]} radius={0.028} position={[s * 0.115, 0.05, -0.39]} castShadow>
-            <meshStandardMaterial color="#f1efe9" roughness={0.6} />
+            <Toon c="#f1efe9" />
           </RoundedBox>
           <mesh position={[s * 0.115, 0.012, -0.39]}>
             <boxGeometry args={[0.104, 0.02, 0.25]} />
-            <meshStandardMaterial color="#d7263d" roughness={0.7} />
+            <Toon c="#d7263d" />
           </mesh>
         </group>
       ))}
@@ -420,7 +460,7 @@ export function Character({ progress }: { progress: MutableRefObject<number> }) 
         </mesh>
         <mesh position={[0, 0.5, 0.06]} rotation={[-0.2, 0, 0]} scale={[1, 0.55, 0.7]}>
           <sphereGeometry args={[0.1, 22, 14]} />
-          <meshStandardMaterial color="#3a0610" roughness={1} />
+          <Toon c="#3a0610" />
         </mesh>
         {/* collar around the neck, and drawstrings at the front */}
         <mesh position={[0, 0.552, -0.025]} rotation={[Math.PI / 2 - 0.2, 0, 0]}>
@@ -431,20 +471,22 @@ export function Character({ progress }: { progress: MutableRefObject<number> }) 
         {[-1, 1].map((s) => (
           <mesh key={s} position={[s * 0.035, 0.44, -0.13]} rotation={[0.25, 0, 0]}>
             <cylinderGeometry args={[0.005, 0.005, 0.15, 6]} />
-            <meshStandardMaterial color="#f1efe9" roughness={0.7} />
+            <Toon c="#f1efe9" />
           </mesh>
         ))}
         <mesh position={[0, 0.27, 0.128]}>
           <boxGeometry args={[0.003, 0.32, 0.002]} />
-          <meshStandardMaterial color="#5e0716" roughness={1} />
+          <Toon c="#5e0716" />
         </mesh>
 
         <mesh position={[0, 0.575, -0.04]} castShadow>
           <cylinderGeometry args={[0.048, 0.054, 0.07, 16]} />
-          <meshPhysicalMaterial color="#9a6648" roughness={0.6} />
+          <Toon c="#9a6648" />
         </mesh>
         <group ref={head} position={[0, 0.665, -0.065]}>
-          <Head />
+          <group scale={1.14}>
+            <Head />
+          </group>
         </group>
       </group>
 

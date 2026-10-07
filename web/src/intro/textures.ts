@@ -248,28 +248,3 @@ function wrap(ctx: CanvasRenderingContext2D, text: string, x: number, y: number,
   ctx.fillText(line, x, yy);
 }
 
-/** Bump map of tight little curls, wrapped onto the hair cap. */
-export function makeHairBump() {
-  const W = 512;
-  const H = 256;
-  const [c, ctx] = canvas(W, H);
-  const r = rand(23);
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0, 0, W, H);
-  for (let i = 0; i < 4200; i++) {
-    const x = r() * W;
-    const y = r() * H;
-    const rad = 2.5 + r() * 3.5;
-    const g = ctx.createRadialGradient(x, y, 0, x, y, rad);
-    g.addColorStop(0, `rgba(255,255,255,${0.5 + r() * 0.5})`);
-    g.addColorStop(1, "rgba(255,255,255,0)");
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(x, y, rad, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  const tex = finish(c, false);
-  tex.wrapS = tex.wrapT = RepeatWrapping;
-  tex.repeat.set(3, 2);
-  return tex;
-}
