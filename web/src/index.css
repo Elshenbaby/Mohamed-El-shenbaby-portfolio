@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./comic.css";
 
 @theme {
   --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;

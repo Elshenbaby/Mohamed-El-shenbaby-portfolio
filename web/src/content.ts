@@ -9,8 +9,17 @@ export type Service = {
   blurb: string;
 };
 
+export type UniverseTheme = "noir" | "pop" | "neon" | "pixel" | "punk";
+
+export type Shot = {
+  src: string;
+  caption: string;
+};
+
 export type CaseStudy = {
   id: string;
+  universe: string;
+  theme: UniverseTheme;
   name: string;
   tagline: string;
   problem: string;
@@ -21,6 +30,8 @@ export type CaseStudy = {
   stack: string[];
   featured?: boolean;
   links?: Link[];
+  /** Screens that normally sit behind a sign-in, so visitors can see inside. */
+  insideShots?: Shot[];
 };
 
 export type MaintainedProject = {
@@ -181,10 +192,12 @@ export const content = {
   caseStudies: [
     {
       id: "soluo",
+      universe: "Earth-001",
+      theme: "noir",
       name: "Soluo",
       tagline: "Custom CRM platform",
       problem:
-        "Every Local Committee ran accounts, deals, and membership through Podio. No shared flow across committees, no single source of truth, and every report meant someone manually pulling numbers together.",
+        "Every branch ran its accounts, deals, and members in an off-the-shelf tool that didn't fit how they worked. No shared flow between branches, no single source of truth, and every report meant someone pulling numbers together by hand.",
       blurb:
         "Rebuilt a legacy CRM into a full Django system for companies, deals, membership, and live sync. Now running in production.",
       image: `${import.meta.env.BASE_URL}projects/soluo.png`,
@@ -200,6 +213,8 @@ export const content = {
     },
     {
       id: "global-village-26",
+      universe: "Earth-026",
+      theme: "pop",
       name: "Global Village 26",
       tagline: "Event website & registration",
       problem:
@@ -226,6 +241,8 @@ export const content = {
     },
     {
       id: "iris",
+      universe: "Earth-404",
+      theme: "neon",
       name: "IRIS",
       tagline: "Analytics dashboard",
       problem:
@@ -233,12 +250,14 @@ export const content = {
       blurb:
         "Performance dashboard so leadership can see pipeline health in one place. Auto-refreshed, not hand-built sheets.",
       image: `${import.meta.env.BASE_URL}projects/iris.png`,
-      highlights: ["Rankings by branch", "Local committee deep dives", "Term comparisons", "Achiever tracking"],
+      highlights: ["Rankings by branch", "Branch deep dives", "Term comparisons", "Achiever tracking"],
       stack: ["Django", "PostgreSQL", "Redis"],
       links: [{ label: "Live site", href: "https://iris.aiesec.org.eg/" }],
     },
     {
       id: "omar-web",
+      universe: "Earth-8BIT",
+      theme: "pixel",
       name: "Omar's Journey",
       tagline: "Interactive portfolio site",
       problem:

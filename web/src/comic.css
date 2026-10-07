@@ -1,0 +1,534 @@
+:root {
+  --color-night: #0d0a1c;
+  --color-paper: #f6f1e7;
+  --color-ink: #0b0816;
+  --color-magenta: #ff2a6d;
+  --color-cyan: #05d9e8;
+  --color-yellow: #ffe14d;
+  --color-violet: #7b2cff;
+  --color-hoodie: #d7263d;
+  --font-comic: "Bangers", "Impact", sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --pop: cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+@layer components {
+/* ---------- lettering ---------- */
+
+.comic-logo {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-comic);
+  font-size: clamp(3.2rem, 11vw, 9.5rem);
+  line-height: 0.86;
+  letter-spacing: 0.02em;
+  color: var(--color-paper);
+  -webkit-text-stroke: 3px var(--color-ink);
+  text-shadow:
+    -5px 0 0 var(--color-cyan),
+    5px 3px 0 var(--color-magenta),
+    9px 9px 0 var(--color-ink);
+  transform: rotate(-3deg);
+}
+.comic-logo span:nth-child(2) {
+  color: var(--color-yellow);
+  margin-left: 0.5em;
+}
+
+.dimension-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  background: var(--color-cyan);
+  padding: 0.35rem 0.7rem;
+  border: 2px solid var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-magenta);
+}
+
+.caption {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  line-height: 1.45;
+  color: var(--color-ink);
+  background: var(--color-yellow);
+  border: 3px solid var(--color-ink);
+  padding: 0.7rem 1rem;
+  box-shadow: 6px 6px 0 var(--color-ink);
+  transform: rotate(-1.2deg);
+}
+.caption--cyan {
+  background: var(--color-cyan);
+}
+.caption--magenta {
+  background: var(--color-magenta);
+  color: var(--color-paper);
+}
+.caption--paper {
+  background: var(--color-paper);
+}
+
+.sfx {
+  font-family: var(--font-comic);
+  font-size: clamp(4.5rem, 16vw, 11rem);
+  line-height: 0.9;
+  color: var(--color-yellow);
+  -webkit-text-stroke: 4px var(--color-ink);
+  text-shadow:
+    6px 6px 0 var(--color-magenta),
+    12px 12px 0 var(--color-ink);
+  transform: rotate(-8deg) skewX(-6deg);
+}
+
+/* captions pop in on "twos": stepped, like drawn frames */
+.beat > * {
+  opacity: 0;
+  transform: scale(0.6) rotate(-6deg);
+  transition:
+    opacity 0.12s steps(2),
+    transform 0.25s steps(3);
+}
+.beat--on > * {
+  opacity: 1;
+  transform: rotate(-1.2deg);
+}
+.beat--on > .sfx {
+  transform: rotate(-8deg) skewX(-6deg);
+}
+.beat--on > .caption--late {
+  transition-delay: 0.35s;
+}
+
+.scroll-hint {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-paper);
+}
+.scroll-hint::after {
+  content: "";
+  display: block;
+  width: 2px;
+  height: 36px;
+  margin: 0.6rem auto 0;
+  background: linear-gradient(var(--color-yellow), transparent);
+  animation: hint 1.4s steps(6) infinite;
+}
+@keyframes hint {
+  from {
+    transform: scaleY(0.2);
+    transform-origin: top;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+.skip-intro {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-paper);
+  border: 2px solid var(--color-paper);
+  padding: 0.45rem 0.8rem;
+  transition: background 0.15s, color 0.15s;
+}
+.skip-intro:hover {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* ---------- page furniture ---------- */
+
+.comic-nav {
+  background: var(--color-ink);
+  border-bottom: 3px solid var(--color-ink);
+  box-shadow: 0 3px 0 var(--color-magenta);
+}
+.comic-nav nav a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-paper);
+}
+.comic-nav nav a:hover {
+  color: var(--color-yellow);
+}
+
+.paper {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  background-image: radial-gradient(rgba(11, 8, 22, 0.09) 1.1px, transparent 1.4px);
+  background-size: 9px 9px;
+}
+
+.section-title {
+  font-family: var(--font-comic);
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: var(--color-yellow);
+  -webkit-text-stroke: 2.5px var(--color-ink);
+  text-shadow:
+    4px 4px 0 var(--color-magenta),
+    8px 8px 0 var(--color-ink);
+}
+.section-title--dark {
+  color: var(--color-paper);
+}
+
+.panel {
+  position: relative;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border: 3px solid var(--color-ink);
+  box-shadow: 8px 8px 0 var(--color-ink);
+}
+
+.halftone-veil {
+  position: relative;
+  overflow: hidden;
+}
+.halftone-veil::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(11, 8, 22, 0.28) 1.2px, transparent 1.7px);
+  background-size: 6px 6px;
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+
+.sticker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.55rem;
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: 3px 3px 0 var(--color-ink);
+}
+.sticker:nth-child(3n + 1) {
+  transform: rotate(-2deg);
+}
+.sticker:nth-child(3n + 2) {
+  transform: rotate(1.5deg);
+}
+
+.bubble {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-comic);
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  border: 3px solid var(--color-ink);
+  border-radius: 999px;
+  padding: 0.55rem 1.3rem 0.45rem;
+  box-shadow: 5px 5px 0 var(--color-ink);
+  transition:
+    transform 0.18s var(--pop),
+    box-shadow 0.18s;
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  left: 22%;
+  bottom: -14px;
+  width: 18px;
+  height: 18px;
+  background: inherit;
+  border-right: 3px solid var(--color-ink);
+  border-bottom: 3px solid var(--color-ink);
+  transform: skewX(30deg) rotate(45deg);
+  transform-origin: center;
+}
+.bubble:hover {
+  transform: translate(-2px, -3px) rotate(-2deg);
+  box-shadow: 8px 8px 0 var(--color-ink);
+}
+.bubble--yellow {
+  background: var(--color-yellow);
+}
+.bubble--magenta {
+  background: var(--color-magenta);
+  color: var(--color-paper);
+}
+.bubble--cyan {
+  background: var(--color-cyan);
+}
+
+/* the glitchy band between universes */
+.dimension-shift {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-ink);
+  border-block: 3px solid var(--color-ink);
+  font-family: var(--font-comic);
+  letter-spacing: 0.08em;
+  color: var(--color-paper);
+}
+.dimension-shift__track {
+  display: flex;
+  width: max-content;
+  gap: 3rem;
+  padding: 0.8rem 0;
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  animation: shift-track 18s steps(90) infinite linear;
+  text-shadow:
+    -3px 0 var(--color-cyan),
+    3px 0 var(--color-magenta);
+}
+@keyframes shift-track {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- universes: every project drawn in its own style ---------- */
+
+.universe {
+  position: relative;
+  isolation: isolate;
+}
+.universe-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.universe-name {
+  font-family: var(--font-comic);
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+}
+
+/* Noir: black, white and one cold accent */
+.u-noir {
+  background: #0c0c10;
+  color: #f2f2f2;
+  background-image:
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 9px);
+}
+.u-noir .universe-name {
+  color: #f2f2f2;
+  -webkit-text-stroke: 2px #000;
+  text-shadow: 5px 5px 0 var(--color-cyan);
+}
+.u-noir .panel {
+  background: #f2f2f2;
+  filter: grayscale(0.15) contrast(1.05);
+}
+.u-noir .universe-label {
+  color: var(--color-cyan);
+}
+
+/* Pop-art: Ben-Day dots and primary colors */
+.u-pop {
+  background-color: var(--color-yellow);
+  color: var(--color-ink);
+  background-image: radial-gradient(rgba(255, 42, 109, 0.45) 2.2px, transparent 2.6px);
+  background-size: 14px 14px;
+}
+.u-pop .universe-name {
+  color: var(--color-hoodie);
+  -webkit-text-stroke: 3px var(--color-ink);
+  text-shadow: 6px 6px 0 var(--color-ink);
+}
+.u-pop .universe-label {
+  color: var(--color-ink);
+}
+
+/* Neon: gradient anime glow */
+.u-neon {
+  background: radial-gradient(ellipse at 20% 0%, #5b1fb8 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 100%, #c2185b 0%, transparent 50%), #140a2b;
+  color: #f4ecff;
+}
+.u-neon .universe-name {
+  color: #fff;
+  text-shadow:
+    0 0 18px rgba(255, 42, 109, 0.9),
+    4px 4px 0 var(--color-violet);
+}
+.u-neon .universe-label {
+  color: #ff8bd0;
+}
+.u-neon .panel {
+  box-shadow:
+    8px 8px 0 var(--color-violet),
+    0 0 40px rgba(123, 44, 255, 0.35);
+}
+
+/* 8-bit: chunky pixels, CRT */
+.u-pixel {
+  background: #10123a;
+  color: #e9f0ff;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+.u-pixel .universe-name {
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(1.8rem, 5.5vw, 3.8rem);
+  line-height: 1.15;
+  color: var(--color-yellow);
+  text-shadow: 4px 4px 0 #b4541a;
+}
+.u-pixel .universe-label {
+  color: #7cf29a;
+}
+.u-pixel .panel {
+  border-radius: 0;
+  box-shadow: 6px 6px 0 #000;
+  image-rendering: pixelated;
+}
+
+/* Punk zine: torn paper collage */
+.u-punk {
+  background: #f1ece2;
+  color: var(--color-ink);
+  background-image: repeating-linear-gradient(-8deg, rgba(11, 8, 22, 0.06) 0 1px, transparent 1px 7px);
+}
+.u-punk .universe-name {
+  color: var(--color-ink);
+  background: var(--color-magenta);
+  display: inline-block;
+  padding: 0 0.15em;
+  transform: rotate(-2deg);
+  box-shadow: 6px 6px 0 var(--color-ink);
+}
+.u-punk .universe-label {
+  color: var(--color-hoodie);
+}
+
+/* browser frame used for "behind the login" shots */
+.browser {
+  border: 3px solid var(--color-ink);
+  background: #fff;
+  box-shadow: 8px 8px 0 var(--color-ink);
+  overflow: hidden;
+}
+.browser__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-bottom: 3px solid var(--color-ink);
+  background: #e9e4f5;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #3d3655;
+}
+.browser__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-ink);
+}
+
+/* trading cards for the maintained platforms */
+.variant-card {
+  transition: transform 0.25s var(--pop);
+}
+.variant-card:hover {
+  transform: translateY(-6px) rotate(-1.5deg);
+}
+
+.stat-bar {
+  height: 12px;
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper);
+}
+.stat-bar > span {
+  display: block;
+  height: 100%;
+  background: repeating-linear-gradient(90deg, var(--color-magenta) 0 10px, var(--color-ink) 10px 12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dimension-shift__track,
+  .scroll-hint::after {
+    animation: none;
+  }
+  .beat > * {
+    transition: none;
+  }
+}
+
+/* universe selector chips in the Multiverse header */
+.portal-chip {
+  display: inline-block;
+  font-family: var(--font-comic);
+  font-size: 1.6rem;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  padding: 0.6rem 1rem 0.5rem;
+  border: 3px solid var(--color-ink);
+  box-shadow: 5px 5px 0 var(--color-paper);
+  transition: transform 0.18s var(--pop);
+}
+.portal-chip:hover {
+  transform: translate(-2px, -3px) rotate(-2deg);
+}
+.portal-chip--noir {
+  background: #f2f2f2;
+  color: #0c0c10;
+}
+.portal-chip--pop {
+  background: var(--color-yellow);
+  color: var(--color-hoodie);
+}
+.portal-chip--neon {
+  background: linear-gradient(120deg, #7b2cff, #ff2a6d);
+  color: #fff;
+}
+.portal-chip--pixel {
+  background: #10123a;
+  color: var(--color-yellow);
+}
+.portal-chip--punk {
+  background: var(--color-magenta);
+  color: var(--color-ink);
+}
+
+/* final splash page: speed-line burst */
+.contact-splash {
+  background:
+    repeating-conic-gradient(from 0deg at 50% 45%, #ff2a6d 0deg 6deg, #e01e5a 6deg 12deg),
+    #ff2a6d;
+  color: var(--color-paper);
+}
+.contact-splash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 45%, transparent 0 22%, rgba(11, 8, 22, 0.35) 70%);
+  pointer-events: none;
+}
+
+}
